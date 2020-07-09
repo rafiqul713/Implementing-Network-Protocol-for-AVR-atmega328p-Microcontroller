@@ -1,0 +1,1 @@
+Minicom command from linux terminal: minicom -b 19200 -o -D /dev/ttyAMA0
