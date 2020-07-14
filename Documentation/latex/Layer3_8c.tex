@@ -1,0 +1,133 @@
+\hypertarget{Layer3_8c}{}\section{Rasp\+Net/\+Layer 3/\+Layer3.c File Reference}
+\label{Layer3_8c}\index{Rasp\+Net/\+Layer 3/\+Layer3.\+c@{Rasp\+Net/\+Layer 3/\+Layer3.\+c}}
+{\ttfamily \#include \char`\"{}Layer3.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Miscellaneous.\+c\char`\"{}}\\*
+Include dependency graph for Layer3.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Layer3_8c__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Layer3_8c__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}{discard\+\_\+packet} (struct \hyperlink{structPacket}{Packet} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em This function is used to delete packet. \end{DoxyCompactList}\item 
+int \hyperlink{Layer3_8c_a23b38c7493fb43e33264c3972782f496}{type\+\_\+of\+\_\+msg} (struct \hyperlink{structPacket}{Packet} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em This function is used to detect the type of message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Layer3.\+c@{Layer3.\+c}!discard\+\_\+packet@{discard\+\_\+packet}}
+\index{discard\+\_\+packet@{discard\+\_\+packet}!Layer3.\+c@{Layer3.\+c}}
+\subsubsection[{\texorpdfstring{discard\+\_\+packet(struct Packet $\ast$packet)}{discard_packet(struct Packet *packet)}}]{\setlength{\rightskip}{0pt plus 5cm}void discard\+\_\+packet (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Packet} $\ast$}]{packet}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}{}\label{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}
+
+
+This function is used to delete packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & structure pointer, it\textquotesingle{}s type is \hyperlink{structPacket}{Packet} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+5                                           \{
+6     packet->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination}=0;
+7     packet->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source}=0b00000000;
+8     packet->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble}=0b00000000;
+9     packet->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz}=0b00000000;
+10     packet->\hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc}=0b00000000000000000000000000000000;
+11 \}
+\end{DoxyCode}
+\index{Layer3.\+c@{Layer3.\+c}!type\+\_\+of\+\_\+msg@{type\+\_\+of\+\_\+msg}}
+\index{type\+\_\+of\+\_\+msg@{type\+\_\+of\+\_\+msg}!Layer3.\+c@{Layer3.\+c}}
+\subsubsection[{\texorpdfstring{type\+\_\+of\+\_\+msg(struct Packet $\ast$packet)}{type_of_msg(struct Packet *packet)}}]{\setlength{\rightskip}{0pt plus 5cm}int type\+\_\+of\+\_\+msg (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Packet} $\ast$}]{packet}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer3_8c_a23b38c7493fb43e33264c3972782f496}{}\label{Layer3_8c_a23b38c7493fb43e33264c3972782f496}
+
+
+This function is used to detect the type of message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & structure pointer, it\textquotesingle{}s type is \hyperlink{structPacket}{Packet} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer type data, which is defined in macro 
+\end{DoxyReturn}
+$<$ At first initiaze message type as unknown
+
+$<$ Extract the source address
+
+$<$ Extract destination address
+
+$<$Return my own message to me
+
+$<$Receive my own broadcasting message
+
+$<$ Receive broadcasting message
+
+$<$ Message send to me
+
+$<$Message send to other node\+: relay
+
+$<$Message from unknown source which can not be identified 
+\begin{DoxyCode}
+14                                       \{
+15     \textcolor{keywordtype}{int} message\_type=\hyperlink{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}{unknown}; 
+16     \textcolor{keywordtype}{int} source\_address = packet->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source}; 
+17     \textcolor{keywordtype}{int} destination\_address=packet->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination}; 
+19     \textcolor{keywordflow}{if}((source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id}) && (destination\_address!=
+      \hyperlink{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{broadcasting\_id}))\{
+20         message\_type=\hyperlink{Layer3_8h_ab7153c7289145c9aab31e838d3f29b0f}{return\_my\_own\_msg}; 
+22     \}
+23     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id}) && (destination\_address==
+      \hyperlink{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{broadcasting\_id}))\{
+24         message\_type=\hyperlink{Layer3_8h_a58352e6aa962709f6a002dbc21406113}{my\_own\_braodcasting\_msg}; 
+25     \}
+26 
+27 
+28     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((!(source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) && (destination\_address==
+      \hyperlink{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{broadcasting\_id}))\{
+29         message\_type=\hyperlink{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}{broadcasting\_msg}; 
+30     \}
+31 
+32     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((!(source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) && (destination\_address==
+      \hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id}))\{
+33         message\_type=\hyperlink{Layer3_8h_a465792308892364b6fd0d58cf45b6043}{msg\_send\_to\_me}; 
+34     \}
+35     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((!(source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) && (!(destination\_address==
+      \hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) &&
+36         (!(destination\_address==\hyperlink{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}{broadcasting\_msg})))\{
+37         message\_type=\hyperlink{Layer3_8h_a8aa9037a9afe926a10f769adc957936a}{msg\_send\_to\_other\_node}; 
+38     \}
+39 
+40     \textcolor{keywordflow}{else}\{
+41         message\_type=\hyperlink{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}{unknown}; 
+42     \}
+43 
+44     \textcolor{keywordflow}{return} message\_type;
+45 
+46 \}
+\end{DoxyCode}

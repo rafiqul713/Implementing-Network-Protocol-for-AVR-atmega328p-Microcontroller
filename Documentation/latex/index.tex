@@ -1,0 +1,75 @@
+\section*{Architecture }
+
+In this project, I implement 3 layers of Rasp\+Net protocol. Rasp\+Net is a networking protocol contains 7 layers as like as O\+SI model, but limited to basic functions. In this project, I developed \+Physical Layer, Data Link Layer and Network Layer of Rasp\+Net protocol. \subsection*{Physical Layer}
+
+This layer is responsible for sending and receiving raw bit streams over the physical medium. According to, Rasp\+Net protocol, in Physical Layer two wires are used from one node to the next. The first one is data-\/pin, the second one is the clock-\/signal. Whenever the clock-\/signal changes (from 1 to 0 or from 0 to 1) there is a new bit there for reading on the data-\/pin. \subsection*{Data Link Layer}
+
+This layer is responsible for the reliable transmission of data frames between two connected nodes. According to Rasp\+Net, Layer 2 bundles all bits together to send network frames. A network frame begins with a preamble of \char`\"{}01111110\char`\"{}. In this layer, C\+R\+C-\/32 (cyclic redundancy check) is used for error detection. \subsection*{Network Layer}
+
+This layer structure and manage a multi-\/node network, addressing, routing as well as traffic control. According to Rasp\+Net protocol, Layer 3 handles addressing, routing as well as the priority of each packet.\+ 
+
+\section*{Technology }
+
+\subsection*{Programming language}
+
+C programming language is used to implement this Rasp\+Net protocol.
+
+\subsection*{Hardware device}
+
+
+\begin{DoxyItemize}
+\item Raspberry Pi\+: Raspberry pi is a single-\/board computer.
+\item Gertboard\+: \+The Gertboard is an input/output (I/O) extension board for the Raspberry Pi computer. It fits onto the\+G\+P\+IO (general-\/purpose Input/\+Output) pins of the Raspberry Pi.\+ 
+\item Microcontroller\+: A\+VR Atmega328p microcontroller is used here. Gertboard contains this microcontroller inside the board. So it is not needed to add a separate microcontroller. Atmega328p is a single-\/chip microcontroller. It has an 8 bit R\+I\+SC processor.
+\end{DoxyItemize}
+
+\subsection*{Toolchain}
+
+
+\begin{DoxyItemize}
+\item Operating system\+: Linux based operating system is used here. N\+O\+OB, Raspbian, R\+I\+SC OS, \+Ubuntu Mate, Ubuntu Core, etc are usually used for Raspberry Pi computer.
+\item Serial communication program\+: For serial communication purposes, minicom is used. Minicom is a text-\/based serial communication program. Minicom command from the terminal has been given below.
+\end{DoxyItemize}
+
+\begin{quote}
+{\bfseries Command\+:} minicom -\/b 19200 -\/o -\/D /dev/tty\+A\+M\+A0 \end{quote}
+
+
+
+\begin{DoxyItemize}
+\item Compiler\+: avr-\/gcc is used to compile C code.
+\item avrdude\+: A\+V\+R\+D\+U\+DE is a command line program to download/upload/manipulate the R\+OM and E\+E\+P\+R\+OM contents of A\+VR microcontrollers using the in-\/system programming techniquee.
+\item Compiler\+:gcc-\/avr \+: Cross-\/compiler for C programming complitation for A\+VR microcontroller.
+\item A\+VR library\+: avr-\/libc library is used which provides built-\/in functionalities to use with C programming.
+\end{DoxyItemize}
+
+\subsection*{Installation}
+
+
+\begin{DoxyItemize}
+\item Minicom installation in Linux (Debian, Ubuntu, Kali, Mint) \begin{quote}
+{\bfseries Command\+:} sudo apt install minicom -\/y \end{quote}
+
+\item Minicom installation in Linux (Fedora, Cent\+OS, R\+H\+EL) \begin{quote}
+{\bfseries Command\+:} sudo yum install minicom -\/y \end{quote}
+
+\item avrdude installation in Linux \begin{quote}
+{\bfseries Command\+:} sudo apt-\/get install avrdude \end{quote}
+
+\item A\+VR tool chain installation\+: \begin{quote}
+{\bfseries Command\+:} sudo apt-\/get install gcc-\/avr binutils-\/avr avr-\/libc \end{quote}
+
+\end{DoxyItemize}
+
+\subsection*{Reference Links\+:}
+
+
+\begin{DoxyItemize}
+\item \mbox{[} Rasp\+Net protocol \mbox{]}\+: \mbox{[} \href{https://osg.informatik.tu-chemnitz.de/lehre/emblab/protocol_final_4stud.pdf}{\tt https\+://osg.\+informatik.\+tu-\/chemnitz.\+de/lehre/emblab/protocol\+\_\+final\+\_\+4stud.\+pdf} \mbox{]}
+\item \mbox{[}Gertboard Manual\mbox{]}\+: \mbox{[} \href{https://osg.informatik.tu-chemnitz.de/lehre/emblab/gertboard_manual_2.0.pdf}{\tt https\+://osg.\+informatik.\+tu-\/chemnitz.\+de/lehre/emblab/gertboard\+\_\+manual\+\_\+2.\+0.\+pdf} \mbox{]}
+\item \mbox{[}A\+VR\mbox{]}\+: \mbox{[} \href{https://osg.informatik.tu-chemnitz.de/lehre/emblab/atmel.pdf}{\tt https\+://osg.\+informatik.\+tu-\/chemnitz.\+de/lehre/emblab/atmel.\+pdf} \mbox{]}
+\item \mbox{[}avrdude\mbox{]}\+: \mbox{[}\href{https://www.nongnu.org/avrdude/}{\tt https\+://www.\+nongnu.\+org/avrdude/} \mbox{]}
+\item \mbox{[}avr-\/gcc\mbox{]}\+: \mbox{[}\href{https://gcc.gnu.org/wiki/avr-gcc}{\tt https\+://gcc.\+gnu.\+org/wiki/avr-\/gcc} \mbox{]}
+\item \mbox{[}Minicom\mbox{]}\+: \mbox{[}\href{https://salsa.debian.org/minicom-team/minicom5}{\tt https\+://salsa.\+debian.\+org/minicom-\/team/minicom5} \mbox{]}
+\item \mbox{[}Raspberry Pi\mbox{]}\+: \mbox{[}\href{https://www.raspberrypi.org/}{\tt https\+://www.\+raspberrypi.\+org/} \mbox{]} 
+\end{DoxyItemize}

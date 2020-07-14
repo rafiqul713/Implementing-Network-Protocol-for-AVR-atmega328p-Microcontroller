@@ -1,0 +1,113 @@
+\hypertarget{Layer1_8h}{}\section{Rasp\+Net/\+Layer 1/\+Layer1.h File Reference}
+\label{Layer1_8h}\index{Rasp\+Net/\+Layer 1/\+Layer1.\+h@{Rasp\+Net/\+Layer 1/\+Layer1.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{Layer1_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Layer1_8h_a229b2097a7d8df6649528de6108edb54}{L\+E\+D\+\_\+blink\+\_\+for\+\_\+clock\+\_\+signal\+\_\+receive} ()
+\begin{DoxyCompactList}\small\item\em This functions is used for debugging purpose L\+ED blinks based on clock signal. \end{DoxyCompactList}\item 
+void \hyperlink{Layer1_8h_a2081bb4779c7101b51f8572e20fab5e3}{L\+E\+D\+\_\+blink\+\_\+for\+\_\+data\+\_\+signal\+\_\+receive} ()
+\begin{DoxyCompactList}\small\item\em This functions is used for debugging purpose L\+ED blinks based on data signal. \end{DoxyCompactList}\item 
+void \hyperlink{Layer1_8h_a86a83b72f60ece554515ac4a4316dca6}{clock\+\_\+signal\+\_\+change} ()
+\begin{DoxyCompactList}\small\item\em Change clock signal\+: from high(1) to low(0), low(0) to high(1) \end{DoxyCompactList}\item 
+void \hyperlink{Layer1_8h_abf739cbeeff67b31459f8899e02986b0}{clock\+\_\+signal\+\_\+receive} ()
+\begin{DoxyCompactList}\small\item\em Receive the clock signal when the clock signal is changed, then a new bit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Layer1.\+h@{Layer1.\+h}!clock\+\_\+signal\+\_\+change@{clock\+\_\+signal\+\_\+change}}
+\index{clock\+\_\+signal\+\_\+change@{clock\+\_\+signal\+\_\+change}!Layer1.\+h@{Layer1.\+h}}
+\subsubsection[{\texorpdfstring{clock\+\_\+signal\+\_\+change()}{clock_signal_change()}}]{\setlength{\rightskip}{0pt plus 5cm}void clock\+\_\+signal\+\_\+change (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer1_8h_a86a83b72f60ece554515ac4a4316dca6}{}\label{Layer1_8h_a86a83b72f60ece554515ac4a4316dca6}
+
+
+Change clock signal\+: from high(1) to low(0), low(0) to high(1) 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ if clock signal is H\+I\+GH,then make it L\+OW
+
+$<$ if clock signal is L\+OW,then make it H\+I\+GH 
+\begin{DoxyCode}
+19                            \{
+20     
+21     \textcolor{keywordflow}{if}(PINB & (1<<PB4)) \{
+22         PORTB&=~(1<<PB4); 
+23     \}
+24     \textcolor{keywordflow}{else} \{
+25         PORTB|=(1<<PB4); 
+26     \}
+27 
+28 \}
+\end{DoxyCode}
+\index{Layer1.\+h@{Layer1.\+h}!clock\+\_\+signal\+\_\+receive@{clock\+\_\+signal\+\_\+receive}}
+\index{clock\+\_\+signal\+\_\+receive@{clock\+\_\+signal\+\_\+receive}!Layer1.\+h@{Layer1.\+h}}
+\subsubsection[{\texorpdfstring{clock\+\_\+signal\+\_\+receive()}{clock_signal_receive()}}]{\setlength{\rightskip}{0pt plus 5cm}void clock\+\_\+signal\+\_\+receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer1_8h_abf739cbeeff67b31459f8899e02986b0}{}\label{Layer1_8h_abf739cbeeff67b31459f8899e02986b0}
+
+
+Receive the clock signal when the clock signal is changed, then a new bit. 
+
+is available in the data pin for reading \begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ Used for debugging purpose 
+\begin{DoxyCode}
+31                             \{
+32     \hyperlink{Layer1_8c_a229b2097a7d8df6649528de6108edb54}{LED\_blink\_for\_clock\_signal\_receive}(); 
+33 \}
+\end{DoxyCode}
+\index{Layer1.\+h@{Layer1.\+h}!L\+E\+D\+\_\+blink\+\_\+for\+\_\+clock\+\_\+signal\+\_\+receive@{L\+E\+D\+\_\+blink\+\_\+for\+\_\+clock\+\_\+signal\+\_\+receive}}
+\index{L\+E\+D\+\_\+blink\+\_\+for\+\_\+clock\+\_\+signal\+\_\+receive@{L\+E\+D\+\_\+blink\+\_\+for\+\_\+clock\+\_\+signal\+\_\+receive}!Layer1.\+h@{Layer1.\+h}}
+\subsubsection[{\texorpdfstring{L\+E\+D\+\_\+blink\+\_\+for\+\_\+clock\+\_\+signal\+\_\+receive()}{LED_blink_for_clock_signal_receive()}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+E\+D\+\_\+blink\+\_\+for\+\_\+clock\+\_\+signal\+\_\+receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer1_8h_a229b2097a7d8df6649528de6108edb54}{}\label{Layer1_8h_a229b2097a7d8df6649528de6108edb54}
+
+
+This functions is used for debugging purpose L\+ED blinks based on clock signal. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ L\+ED toggle based on clock signal receive 
+\begin{DoxyCode}
+10                                           \{
+11     PORTB^=(1<<PB3); 
+12 \}
+\end{DoxyCode}
+\index{Layer1.\+h@{Layer1.\+h}!L\+E\+D\+\_\+blink\+\_\+for\+\_\+data\+\_\+signal\+\_\+receive@{L\+E\+D\+\_\+blink\+\_\+for\+\_\+data\+\_\+signal\+\_\+receive}}
+\index{L\+E\+D\+\_\+blink\+\_\+for\+\_\+data\+\_\+signal\+\_\+receive@{L\+E\+D\+\_\+blink\+\_\+for\+\_\+data\+\_\+signal\+\_\+receive}!Layer1.\+h@{Layer1.\+h}}
+\subsubsection[{\texorpdfstring{L\+E\+D\+\_\+blink\+\_\+for\+\_\+data\+\_\+signal\+\_\+receive()}{LED_blink_for_data_signal_receive()}}]{\setlength{\rightskip}{0pt plus 5cm}void L\+E\+D\+\_\+blink\+\_\+for\+\_\+data\+\_\+signal\+\_\+receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer1_8h_a2081bb4779c7101b51f8572e20fab5e3}{}\label{Layer1_8h_a2081bb4779c7101b51f8572e20fab5e3}
+
+
+This functions is used for debugging purpose L\+ED blinks based on data signal. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ L\+ED toggle based on data signal receive 
+\begin{DoxyCode}
+14                                          \{
+15     PORTB^=(1<<PB2); 
+16 \}
+\end{DoxyCode}

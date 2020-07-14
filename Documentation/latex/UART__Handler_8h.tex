@@ -1,0 +1,104 @@
+\hypertarget{UART__Handler_8h}{}\section{Rasp\+Net/\+U\+A\+RT handler/\+U\+A\+R\+T\+\_\+\+Handler.h File Reference}
+\label{UART__Handler_8h}\index{Rasp\+Net/\+U\+A\+R\+T handler/\+U\+A\+R\+T\+\_\+\+Handler.\+h@{Rasp\+Net/\+U\+A\+R\+T handler/\+U\+A\+R\+T\+\_\+\+Handler.\+h}}
+{\ttfamily \#include $<$util/setbaud.\+h$>$}\\*
+Include dependency graph for U\+A\+R\+T\+\_\+\+Handler.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=201pt]{UART__Handler_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{UART__Handler_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{UART__Handler_8h_a62634036639f88eece6fbf226b45f84b}{B\+A\+UD}~19200\+UL
+\item 
+\#define \hyperlink{UART__Handler_8h_a734bbab06e1a9fd2e5522db0221ff6e3}{B\+A\+U\+D\+R\+A\+TE}~(\hyperlink{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}{F\+\_\+\+C\+PU}/(16$\ast$\hyperlink{UART__Handler_8h_a62634036639f88eece6fbf226b45f84b}{B\+A\+UD})-\/1)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{UART__Handler_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\+\_\+transmission} (unsigned char character)
+\begin{DoxyCompactList}\small\item\em U\+A\+RT transmission message\+: to display message. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{UART__Handler_8h_a66dc17a92418b1104efccc95f7e7ec3f}{uart\+\_\+receive} ()
+\begin{DoxyCompactList}\small\item\em U\+A\+RT receive message\+: receive message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}!B\+A\+UD@{B\+A\+UD}}
+\index{B\+A\+UD@{B\+A\+UD}!U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{B\+A\+UD}{BAUD}}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+A\+UD~19200\+UL}\hypertarget{UART__Handler_8h_a62634036639f88eece6fbf226b45f84b}{}\label{UART__Handler_8h_a62634036639f88eece6fbf226b45f84b}
+$<$ allows to include header file when needed otherwise ignore \index{U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}!B\+A\+U\+D\+R\+A\+TE@{B\+A\+U\+D\+R\+A\+TE}}
+\index{B\+A\+U\+D\+R\+A\+TE@{B\+A\+U\+D\+R\+A\+TE}!U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{B\+A\+U\+D\+R\+A\+TE}{BAUDRATE}}]{\setlength{\rightskip}{0pt plus 5cm}\#define B\+A\+U\+D\+R\+A\+TE~({\bf F\+\_\+\+C\+PU}/(16$\ast${\bf B\+A\+UD})-\/1)}\hypertarget{UART__Handler_8h_a734bbab06e1a9fd2e5522db0221ff6e3}{}\label{UART__Handler_8h_a734bbab06e1a9fd2e5522db0221ff6e3}
+
+
+\subsection{Function Documentation}
+\index{U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}!uart\+\_\+receive@{uart\+\_\+receive}}
+\index{uart\+\_\+receive@{uart\+\_\+receive}!U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{uart\+\_\+receive()}{uart_receive()}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char uart\+\_\+receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{UART__Handler_8h_a66dc17a92418b1104efccc95f7e7ec3f}{}\label{UART__Handler_8h_a66dc17a92418b1104efccc95f7e7ec3f}
+
+
+U\+A\+RT receive message\+: receive message. 
+
+\begin{DoxyReturn}{Returns}
+unsigned character, which is received from U\+A\+RT transmission 
+\end{DoxyReturn}
+$<$ Wait until the data is received 
+\begin{DoxyCode}
+11                             \{
+12     \textcolor{keywordflow}{while}(!(UCSR0A & (1<<RXC0))); 
+13     \textcolor{keywordflow}{return} UDR0; \textcolor{comment}{// UDR return 8 bit}
+14  \}
+\end{DoxyCode}
+\index{U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}!uart\+\_\+transmission@{uart\+\_\+transmission}}
+\index{uart\+\_\+transmission@{uart\+\_\+transmission}!U\+A\+R\+T\+\_\+\+Handler.\+h@{U\+A\+R\+T\+\_\+\+Handler.\+h}}
+\subsubsection[{\texorpdfstring{uart\+\_\+transmission(unsigned char character)}{uart_transmission(unsigned char character)}}]{\setlength{\rightskip}{0pt plus 5cm}void uart\+\_\+transmission (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{character}
+\end{DoxyParamCaption}
+)}\hypertarget{UART__Handler_8h_ade3319d0c8a73744f47a483a8816cabe}{}\label{UART__Handler_8h_ade3319d0c8a73744f47a483a8816cabe}
+
+
+U\+A\+RT transmission message\+: to display message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em character} & Unsigned integer to display \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void nothing has to be returned
+\end{DoxyReturn}
+U\+A\+RT transmission message\+: to display message.
+
+$<$ allows to include header file when needed otherwise ignore
+\begin{DoxyParams}{Parameters}
+{\em character} & Character for display in the minicom command line interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ Wait until the register is free
+
+$<$write the new data in Transmit Buffer (U\+DR) 
+\begin{DoxyCode}
+6                                                \{
+7     \textcolor{keywordflow}{while}(!(UCSR0A & (1<<UDRE0))); 
+8     UDR0= send\_data; 
+9 \}
+\end{DoxyCode}

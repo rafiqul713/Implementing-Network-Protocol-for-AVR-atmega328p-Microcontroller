@@ -1,0 +1,108 @@
+\hypertarget{Layer2_8c}{}\section{Rasp\+Net/\+Layer 2/\+Layer2.c File Reference}
+\label{Layer2_8c}\index{Rasp\+Net/\+Layer 2/\+Layer2.\+c@{Rasp\+Net/\+Layer 2/\+Layer2.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}C\+R\+C.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Buffer.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Layer2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Miscellaneous.\+c\char`\"{}}\\*
+Include dependency graph for Layer2.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Layer2_8c__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{Layer2_8c__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{tranmit\+\_\+1} ()
+\begin{DoxyCompactList}\small\item\em Transmit data signal as H\+I\+GH or 1 through the data pin. \end{DoxyCompactList}\item 
+void \hyperlink{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{tranmit\+\_\+0} ()
+\begin{DoxyCompactList}\small\item\em Transmit data signal as L\+OW or 0 through the data pin. \end{DoxyCompactList}\item 
+int \hyperlink{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{data\+\_\+receive} ()
+\begin{DoxyCompactList}\small\item\em Read the status of the receiver data pin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Layer2.\+c@{Layer2.\+c}!data\+\_\+receive@{data\+\_\+receive}}
+\index{data\+\_\+receive@{data\+\_\+receive}!Layer2.\+c@{Layer2.\+c}}
+\subsubsection[{\texorpdfstring{data\+\_\+receive()}{data_receive()}}]{\setlength{\rightskip}{0pt plus 5cm}int data\+\_\+receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{}\label{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}
+
+
+Read the status of the receiver data pin. 
+
+\begin{DoxyReturn}{Returns}
+integer data which are 0 or 1 
+\end{DoxyReturn}
+$<$ Receiver read the status of P\+D5 pin
+
+$<$ When P\+D5 is H\+I\+GH return 1
+
+$<$ When P\+D5 is L\+OW return 0 
+\begin{DoxyCode}
+24                    \{
+25     \textcolor{keywordflow}{if}(PIND&(1<<PD5)) \{ 
+26         \textcolor{keywordflow}{return} 1;   
+27     \}
+28     \textcolor{keywordflow}{else} \{
+29         \textcolor{keywordflow}{return} 0; 
+30     \}
+31 \}
+\end{DoxyCode}
+\index{Layer2.\+c@{Layer2.\+c}!tranmit\+\_\+0@{tranmit\+\_\+0}}
+\index{tranmit\+\_\+0@{tranmit\+\_\+0}!Layer2.\+c@{Layer2.\+c}}
+\subsubsection[{\texorpdfstring{tranmit\+\_\+0()}{tranmit_0()}}]{\setlength{\rightskip}{0pt plus 5cm}void tranmit\+\_\+0 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{}\label{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}
+
+
+Transmit data signal as L\+OW or 0 through the data pin. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to be returned 
+\end{DoxyReturn}
+$<$ Make P\+B5 pin L\+OW for data transmit 
+\begin{DoxyCode}
+17                  \{
+18 
+19     PORTB&=~(1<<PB5); 
+20 \}
+\end{DoxyCode}
+\index{Layer2.\+c@{Layer2.\+c}!tranmit\+\_\+1@{tranmit\+\_\+1}}
+\index{tranmit\+\_\+1@{tranmit\+\_\+1}!Layer2.\+c@{Layer2.\+c}}
+\subsubsection[{\texorpdfstring{tranmit\+\_\+1()}{tranmit_1()}}]{\setlength{\rightskip}{0pt plus 5cm}void tranmit\+\_\+1 (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{}\label{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}
+
+
+Transmit data signal as H\+I\+GH or 1 through the data pin. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to be returned 
+\end{DoxyReturn}
+$<$ Make P\+B5 pin H\+I\+GH for data transmit 
+\begin{DoxyCode}
+11                  \{
+12 
+13     PORTB|=(1<<PB5); 
+15 \}
+\end{DoxyCode}

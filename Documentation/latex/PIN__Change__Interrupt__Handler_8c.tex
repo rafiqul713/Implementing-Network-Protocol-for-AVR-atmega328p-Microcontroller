@@ -1,0 +1,364 @@
+\hypertarget{PIN__Change__Interrupt__Handler_8c}{}\section{Rasp\+Net/\+Interrupt Handler/\+P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.c File Reference}
+\label{PIN__Change__Interrupt__Handler_8c}\index{Rasp\+Net/\+Interrupt Handler/\+P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Rasp\+Net/\+Interrupt Handler/\+P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Layer1.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Layer2.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Layer3.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Buffer.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}U\+A\+R\+T\+\_\+\+Handler.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Miscellaneous.\+c\char`\"{}}\\*
+Include dependency graph for P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{PIN__Change__Interrupt__Handler_8c__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{PIN__Change__Interrupt__Handler_8c__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{PIN__Change__Interrupt__Handler_8c_acdf613f8022f5390f71cfeb1e84885c7}{pin\+\_\+change\+\_\+interrupt\+\_\+initialization} ()
+\item 
+\hyperlink{PIN__Change__Interrupt__Handler_8c_a9c4665742c6b6eb1f0bb9dde41f7cba3}{I\+SR} (P\+C\+I\+N\+T2\+\_\+vect)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{Receiver\+Index} =0
+\item 
+int \hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{Receive\+Buffer\+Index} =0
+\item 
+int \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\+\_\+flag} =1
+\item 
+int \hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\+\_\+flag}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!I\+SR@{I\+SR}}
+\index{I\+SR@{I\+SR}!P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{I\+S\+R(\+P\+C\+I\+N\+T2\+\_\+vect)}{ISR(PCINT2_vect)}}]{\setlength{\rightskip}{0pt plus 5cm}I\+SR (
+\begin{DoxyParamCaption}
+\item[{P\+C\+I\+N\+T2\+\_\+vect}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{PIN__Change__Interrupt__Handler_8c_a9c4665742c6b6eb1f0bb9dde41f7cba3}{}\label{PIN__Change__Interrupt__Handler_8c_a9c4665742c6b6eb1f0bb9dde41f7cba3}
+$<$1. Receive preamble which is 8 bit
+
+$<$ Wait until detect the correct preamble
+
+$<$ Receive bit by bit and check
+
+$<$ C\+RC is correct
+
+$<$ Check type of message
+
+$<$1. When message is sent to me
+
+$<$Delete message
+
+$<$ Consider as higher priority
+
+$<$ Received data is put into transmit buffer
+
+$<$Priority is set for R\+E\+L\+AY
+
+$<$ Consider as higher priority
+
+$<$Priority is set for R\+E\+L\+AY
+
+$<$ Start to receive again 
+\begin{DoxyCode}
+26                  \{
+28     \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}==\hyperlink{Layer3_8h_aa8ef63ae0468c77b8312b92d7154609d}{receive\_preamble}) \{
+29         \textcolor{keywordflow}{if}(\hyperlink{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{data\_receive}()) \{
+30             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},1);
+31             \textcolor{comment}{//uart\_transmission('1');}
+32         \}
+33         \textcolor{keywordflow}{else} \{
+34             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},0);
+35             \textcolor{comment}{//uart\_transmission('0');}
+36         \}
+37 
+38         \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}++;
+39         \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}>=8) \{
+40             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Received Preamble: "});
+41             \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble});
+42             \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_ad063f3ce115eb187d5cbb6fd2b00c0e6}{compare\_preamble}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble},\hyperlink{Buffer_8c_ad32f9b2a3c3f3aba80f847dd8c18f77c}{predefined\_preamble})) \{
+43                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"\(\backslash\)nCorrect Preamble\(\backslash\)n"});
+44                 \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}=0;
+45                 \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_aa59256b98f189dbcee223214dfde1c49}{receive\_crc};
+46 
+47             \}
+48             \textcolor{keywordflow}{else} \{
+49                 \textcolor{comment}{//showLog("Wrong preamble\(\backslash\)n");}
+51 \textcolor{comment}{}                \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble}=
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble}<<1;
+55             \}
+56 
+57 
+58 
+59         \}
+60 
+61     \}
+62 
+64     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}==\hyperlink{Layer3_8h_aa59256b98f189dbcee223214dfde1c49}{receive\_crc}) \{
+65         \textcolor{keywordflow}{if}(\hyperlink{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{data\_receive}()) \{
+66             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc}=\hyperlink{Miscellaneous_8c_a864fd2a5d36c61fdc91090a497784b55}{write\_32\_bit}(
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc},31-\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},1);
+67         \}
+68         \textcolor{keywordflow}{else} \{
+69             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc}=\hyperlink{Miscellaneous_8c_a864fd2a5d36c61fdc91090a497784b55}{write\_32\_bit}(
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc},31-\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},0);
+70         \}
+71 
+72         \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}++;
+73         \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}>=32) \{
+74             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Received CRC: "});
+75             \hyperlink{Miscellaneous_8c_a4da719f1865290663e587ffb1b00744d}{show\_32\_bit\_data}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc});
+76             \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_a1c9fabd7b0478766bb4b611e5dbe8853}{receive\_payload\_size};
+77             \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}=0;
+78         \}
+79 
+80     \}
+81 
+83     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}==\hyperlink{Layer3_8h_a1c9fabd7b0478766bb4b611e5dbe8853}{receive\_payload\_size}) \{
+84         \textcolor{keywordflow}{if}(\hyperlink{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{data\_receive}()) \{
+85             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},1);
+86         \}
+87         \textcolor{keywordflow}{else} \{
+88             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},0);
+89         \}
+90         \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}++;
+91         \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}>=8) \{
+92             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Received Payload size: "});
+93             \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz});
+94             \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_a39e1380303eff462d17201a4cd077b31}{receive\_destination\_address};
+95             \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}=0;
+96         \}
+97 
+98     \}
+99 
+101     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}==\hyperlink{Layer3_8h_a39e1380303eff462d17201a4cd077b31}{receive\_destination\_address}) \{
+102         \textcolor{keywordflow}{if}(\hyperlink{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{data\_receive}()) \{
+103             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},1);
+104 
+105         \}
+106         \textcolor{keywordflow}{else} \{
+107 
+108             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},0);
+109         \}
+110 
+111         \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}++;
+112         \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}>=8) \{
+113             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[0]=
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination};
+114             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"\(\backslash\)nReceived Destination address\(\backslash\)n"});
+115             \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination});
+116             \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_ace2bdbcd80ee617b80126b378b51dfe3}{receive\_source\_address};
+117             \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}=0;
+118         \}
+119 
+120     \}
+121 
+123     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}==\hyperlink{Layer3_8h_ace2bdbcd80ee617b80126b378b51dfe3}{receive\_source\_address}) \{
+124         \textcolor{keywordflow}{if}(\hyperlink{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{data\_receive}()) \{
+125             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},1);
+126         \}
+127         \textcolor{keywordflow}{else} \{
+128             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source}=
+      \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source},7-
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex},0);
+129         \}
+130         \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}++;
+131         \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}>=8) \{
+132             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[1]=
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source};
+133             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"\(\backslash\)nReceived source address\(\backslash\)n"});
+134             \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_a8fc3575b730c4bc458cdce87537175d1}{receive\_payload};
+135             \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source});
+136             \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}=0;
+137             \hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{ReceiveBufferIndex}=2;
+138         \}
+139 
+140     \}
+141 
+143     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}==\hyperlink{Layer3_8h_a8fc3575b730c4bc458cdce87537175d1}{receive\_payload}) \{
+144         \textcolor{keywordflow}{if}(\hyperlink{Layer2_8c_a5c4475bf56e57eeadef01672aa670a82}{data\_receive}()) \{
+145             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{ReceiveBufferIndex}]=\hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[\hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{ReceiveBufferIndex}],(7-(
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}%8)),1);
+146         \}
+147         \textcolor{keywordflow}{else} \{
+148             \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{ReceiveBufferIndex}]=\hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\_8\_bit}(
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[\hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{ReceiveBufferIndex}],(7-(
+      \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}%8)),0);
+149         \}
+150 
+151         \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}++;
+152         \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}%8==0) \{
+153             \hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{ReceiveBufferIndex}=\hyperlink{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{ReceiveBufferIndex}+1;
+154         \}
+155 
+156 
+157         \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}>=(((\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz})-2)*8)) \{
+158             \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_ae248a94ed37c2d8dad80d8a627ad9974}{received\_crc\_check};
+159             \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}=0;
+160             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Received payload: "});
+161             \hyperlink{Miscellaneous_8c_a9ea1d4b6a27b5caa55c150b2ba17983a}{show\_payload}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload},\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz});
+162 
+163         \}
+164 
+165     \}
+166 
+168     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}==\hyperlink{Layer3_8h_ae248a94ed37c2d8dad80d8a627ad9974}{received\_crc\_check}) \{
+169         uint32\_t crc\_calculation=\hyperlink{CRC_8c_a80a6d5b0482ae9760e75c021a70a4ce1}{CRC\_Computation}(
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload},
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz});
+170         \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"CRC Check: \(\backslash\)n"});
+172         \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a7ea454e652a249ba5f17f6233e65887a}{compare\_crc}(crc\_calculation,\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}->
+      \hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc})) \{
+173             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Correct CRC"});
+174             \textcolor{keywordtype}{int} message\_type=\hyperlink{Layer3_8c_a23b38c7493fb43e33264c3972782f496}{type\_of\_msg}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}); 
+177             \textcolor{keywordflow}{if}(message\_type==\hyperlink{Layer3_8h_a465792308892364b6fd0d58cf45b6043}{msg\_send\_to\_me}) \{
+178                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Message send to me"});
+179                 \hyperlink{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}{discard\_packet}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer});
+180                 \textcolor{comment}{//transmit\_packet=my\_own\_packet;}
+181 
+182 
+183             \}
+184 
+186             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(message\_type==\hyperlink{Layer3_8h_a8aa9037a9afe926a10f769adc957936a}{msg\_send\_to\_other\_node}) \{
+187                 \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_a4a793a607f3e830119fe598d76630898}{priority\_high}; 
+188                 \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_af43b7652801ee9e083162514d5372e9f}{transmitted})\{
+189                     \hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{transmit\_preamble};
+190                 \}
+191                 *\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}=*
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}; 
+192                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Message send to other"});
+193 
+194                 \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_aaccf0a951ca84ac3578fa3bcfbac5522}{priority\_for\_relay}; 
+196             \}
+197 
+199             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(message\_type==\hyperlink{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}{broadcasting\_msg}) \{
+200                 \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_a4a793a607f3e830119fe598d76630898}{priority\_high}; 
+201                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Broadcasting Message"});
+202 
+203                 \textcolor{keywordflow}{if}(\hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_af43b7652801ee9e083162514d5372e9f}{transmitted})\{
+204                         \hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{transmit\_preamble};
+205                 \}
+206                 *\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}=*
+      \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer};
+207                 \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_aaccf0a951ca84ac3578fa3bcfbac5522}{priority\_for\_relay}; 
+210             \}
+211 
+213             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(message\_type==\hyperlink{Layer3_8h_ab7153c7289145c9aab31e838d3f29b0f}{return\_my\_own\_msg}) \{
+214                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Return my own messsage"});
+215                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Discard packet"});
+216                 *\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}= *
+      \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer};
+217                 \hyperlink{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}{discard\_packet}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer});
+218                 \hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{transmit\_preamble};
+219                 \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{priority\_for\_sending\_order};
+220 
+221             \}
+222 
+224             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(message\_type==\hyperlink{Layer3_8h_a58352e6aa962709f6a002dbc21406113}{my\_own\_braodcasting\_msg}) \{
+225                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"My own broadcasting Messsage"});
+226                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Discard packet"});
+227                 *\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}= *
+      \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer};
+228                 \hyperlink{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}{discard\_packet}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer});
+229                 \hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{transmit\_preamble};
+230                 \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{priority\_for\_sending\_order};
+231 
+232             \}
+234             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(message\_type==\hyperlink{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}{unknown})\{
+235                 \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Unknown Message"});
+236             \}
+237 
+238             \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_aa8ef63ae0468c77b8312b92d7154609d}{receive\_preamble}; 
+239             \textcolor{comment}{//discard\_packet(receive\_packet\_pointer);}
+240             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"----------Receive Cycle Finish----------"});
+241 
+242         \}
+243 
+245         \textcolor{keywordflow}{else} \{
+246             \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Wrong CRC"});
+247             \hyperlink{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}{discard\_packet}(\hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer});
+248             \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_aa8ef63ae0468c77b8312b92d7154609d}{receive\_preamble};
+249 
+250         \}
+251 
+252         \hyperlink{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{ReceiverIndex}=0;
+253 
+254     \}
+255 
+256 
+257 \}
+\end{DoxyCode}
+\index{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!pin\+\_\+change\+\_\+interrupt\+\_\+initialization@{pin\+\_\+change\+\_\+interrupt\+\_\+initialization}}
+\index{pin\+\_\+change\+\_\+interrupt\+\_\+initialization@{pin\+\_\+change\+\_\+interrupt\+\_\+initialization}!P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{pin\+\_\+change\+\_\+interrupt\+\_\+initialization()}{pin_change_interrupt_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void pin\+\_\+change\+\_\+interrupt\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{PIN__Change__Interrupt__Handler_8c_acdf613f8022f5390f71cfeb1e84885c7}{}\label{PIN__Change__Interrupt__Handler_8c_acdf613f8022f5390f71cfeb1e84885c7}
+P\+IN Change interrupt is used for receiving data $<$ enabled P\+C\+I\+NT\mbox{[}23\+:16\mbox{]} pin will cause an interrupt
+
+$<$ pin change interrupt for P\+D4 or clock receive signal 
+\begin{DoxyCode}
+50                                           \{
+51   PCICR|= (1<<PCIE2); 
+52   PCMSK2|=(1<<PCINT20);
+53 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!Receive\+Buffer\+Index@{Receive\+Buffer\+Index}}
+\index{Receive\+Buffer\+Index@{Receive\+Buffer\+Index}!P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{Receive\+Buffer\+Index}{ReceiveBufferIndex}}]{\setlength{\rightskip}{0pt plus 5cm}int Receive\+Buffer\+Index =0}\hypertarget{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}{}\label{PIN__Change__Interrupt__Handler_8c_af6cabaa2e9aa161ceb2c0b36afee5a03}
+\index{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!receiver\+\_\+flag@{receiver\+\_\+flag}}
+\index{receiver\+\_\+flag@{receiver\+\_\+flag}!P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{receiver\+\_\+flag}{receiver_flag}}]{\setlength{\rightskip}{0pt plus 5cm}int receiver\+\_\+flag =1}\hypertarget{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{}\label{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}
+\index{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!Receiver\+Index@{Receiver\+Index}}
+\index{Receiver\+Index@{Receiver\+Index}!P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{Receiver\+Index}{ReceiverIndex}}]{\setlength{\rightskip}{0pt plus 5cm}int Receiver\+Index =0}\hypertarget{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}{}\label{PIN__Change__Interrupt__Handler_8c_aeae841bbc913f2cc27fe80376dae649f}
+\index{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!sender\+\_\+flag@{sender\+\_\+flag}}
+\index{sender\+\_\+flag@{sender\+\_\+flag}!P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{sender\+\_\+flag}{sender_flag}}]{\setlength{\rightskip}{0pt plus 5cm}int sender\+\_\+flag}\hypertarget{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{}\label{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}

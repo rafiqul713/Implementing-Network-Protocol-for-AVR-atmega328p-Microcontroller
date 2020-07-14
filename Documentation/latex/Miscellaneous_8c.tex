@@ -1,0 +1,425 @@
+\hypertarget{Miscellaneous_8c}{}\section{Rasp\+Net/\+Main and Others/\+Miscellaneous.c File Reference}
+\label{Miscellaneous_8c}\index{Rasp\+Net/\+Main and Others/\+Miscellaneous.\+c@{Rasp\+Net/\+Main and Others/\+Miscellaneous.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include $<$stdio.\+h$>$}\\*
+{\ttfamily \#include $<$string.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Buffer.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Layer2.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Miscellaneous.\+h\char`\"{}}\\*
+Include dependency graph for Miscellaneous.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Miscellaneous_8c__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Miscellaneous_8c__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\+\_\+8\+\_\+bit} (uint8\+\_\+t bits, int pos)
+\begin{DoxyCompactList}\small\item\em Read from 8 bit unsigned integer. \end{DoxyCompactList}\item 
+int \hyperlink{Miscellaneous_8c_a027b54125044a7b75a94ebdfef27ab46}{read\+\_\+32\+\_\+bit} (uint32\+\_\+t bits, int pos)
+\begin{DoxyCompactList}\small\item\em Read from 32 bit unsigned integer. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{write\+\_\+8\+\_\+bit} (uint8\+\_\+t value, int pos, int value\+\_\+to\+\_\+write)
+\begin{DoxyCompactList}\small\item\em Write in 8 bit unsigned integer. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{Miscellaneous_8c_a864fd2a5d36c61fdc91090a497784b55}{write\+\_\+32\+\_\+bit} (uint32\+\_\+t value, int pos, int value\+\_\+to\+\_\+write)
+\begin{DoxyCompactList}\small\item\em Write in 32 bit unsigned integer. \end{DoxyCompactList}\item 
+void \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{show\+Log} (char msg\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Display message consists of string. \end{DoxyCompactList}\item 
+int \hyperlink{Miscellaneous_8c_ad063f3ce115eb187d5cbb6fd2b00c0e6}{compare\+\_\+preamble} (uint8\+\_\+t a, uint8\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em Compare between received preamble and predefined preamble. \end{DoxyCompactList}\item 
+void \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\+\_\+8\+\_\+bit\+\_\+data} (uint8\+\_\+t data)
+\item 
+void \hyperlink{Miscellaneous_8c_a4da719f1865290663e587ffb1b00744d}{show\+\_\+32\+\_\+bit\+\_\+data} (uint32\+\_\+t data)
+\item 
+void \hyperlink{Miscellaneous_8c_a9ea1d4b6a27b5caa55c150b2ba17983a}{show\+\_\+payload} (uint8\+\_\+t $\ast$data, uint8\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Display payload message. \end{DoxyCompactList}\item 
+int \hyperlink{Miscellaneous_8c_a7ea454e652a249ba5f17f6233e65887a}{compare\+\_\+crc} (uint32\+\_\+t a, uint32\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em Compare between received C\+RC and generated C\+RC from payload. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!compare\+\_\+crc@{compare\+\_\+crc}}
+\index{compare\+\_\+crc@{compare\+\_\+crc}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{compare\+\_\+crc(uint32\+\_\+t a, uint32\+\_\+t b)}{compare_crc(uint32_t a, uint32_t b)}}]{\setlength{\rightskip}{0pt plus 5cm}int compare\+\_\+crc (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{a, }
+\item[{uint32\+\_\+t}]{b}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_a7ea454e652a249ba5f17f6233e65887a}{}\label{Miscellaneous_8c_a7ea454e652a249ba5f17f6233e65887a}
+
+
+Compare between received C\+RC and generated C\+RC from payload. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & 32 bit unsigned integer, which is generated from the payload \\
+\hline
+{\em b} & 32 bit unsigned integer, which is received \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int data, which is 1 if match otherwise, 0 if does not match 
+\end{DoxyReturn}
+$<$ Bit compare using X\+OR
+
+$<$ O X\+OR 1 = 1
+
+$<$ O X\+OR 0 = 0, 1 X\+OR 1 = 0 
+\begin{DoxyCode}
+132                                         \{
+133     \textcolor{keywordflow}{if}(!(a^b)) \{    
+134         \textcolor{keywordflow}{return} 1;   
+135     \}
+136     \textcolor{keywordflow}{else} \{
+137         \textcolor{keywordflow}{return} 0;   
+138     \}
+139 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!compare\+\_\+preamble@{compare\+\_\+preamble}}
+\index{compare\+\_\+preamble@{compare\+\_\+preamble}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{compare\+\_\+preamble(uint8\+\_\+t a, uint8\+\_\+t b)}{compare_preamble(uint8_t a, uint8_t b)}}]{\setlength{\rightskip}{0pt plus 5cm}int compare\+\_\+preamble (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{a, }
+\item[{uint8\+\_\+t}]{b}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_ad063f3ce115eb187d5cbb6fd2b00c0e6}{}\label{Miscellaneous_8c_ad063f3ce115eb187d5cbb6fd2b00c0e6}
+
+
+Compare between received preamble and predefined preamble. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & 8 bit unsigned integer, which is predefined \\
+\hline
+{\em b} & 8 bit unsigned integer, which is received \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int data, which is 1 if match otherwise, 0 if does not match 
+\end{DoxyReturn}
+$<$ Bit compare using X\+OR
+
+$<$ O X\+OR 1 = 1
+
+$<$ O X\+OR 0 = 0, 1 X\+OR 1 = 0 
+\begin{DoxyCode}
+71                                            \{
+72     \textcolor{keywordflow}{if}(!(a^b)) \{                 
+73         \textcolor{keywordflow}{return} 1;                
+74     \}
+75     \textcolor{keywordflow}{else} \{
+76         \textcolor{keywordflow}{return} 0;                
+77     \}
+78 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!read\+\_\+32\+\_\+bit@{read\+\_\+32\+\_\+bit}}
+\index{read\+\_\+32\+\_\+bit@{read\+\_\+32\+\_\+bit}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{read\+\_\+32\+\_\+bit(uint32\+\_\+t bits, int pos)}{read_32_bit(uint32_t bits, int pos)}}]{\setlength{\rightskip}{0pt plus 5cm}int read\+\_\+32\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{bits, }
+\item[{int}]{pos}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_a027b54125044a7b75a94ebdfef27ab46}{}\label{Miscellaneous_8c_a027b54125044a7b75a94ebdfef27ab46}
+
+
+Read from 32 bit unsigned integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bits} & The 32 bit integer to read to \\
+\hline
+{\em pos} & Read bit at particular position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int data which are 1 or 0 
+\end{DoxyReturn}
+$<$ Casting and left shift 
+\begin{DoxyCode}
+21                                         \{
+22     uint32\_t mask;
+23     mask=((uint32\_t)0x00000001) << pos; 
+24     \textcolor{keywordflow}{if}(bits&mask) \{
+25         \textcolor{keywordflow}{return} 1;
+26     \}
+27     \textcolor{keywordflow}{else} \{
+28         \textcolor{keywordflow}{return} 0;
+29     \}
+30 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!read\+\_\+8\+\_\+bit@{read\+\_\+8\+\_\+bit}}
+\index{read\+\_\+8\+\_\+bit@{read\+\_\+8\+\_\+bit}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{read\+\_\+8\+\_\+bit(uint8\+\_\+t bits, int pos)}{read_8_bit(uint8_t bits, int pos)}}]{\setlength{\rightskip}{0pt plus 5cm}int read\+\_\+8\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{bits, }
+\item[{int}]{pos}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{}\label{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}
+
+
+Read from 8 bit unsigned integer. 
+
+$<$ allows to include header file when needed otherwise ignore $<$ Left shift based on pos value
+
+$<$ Logical \& to check bit at particular position 
+\begin{DoxyCode}
+11                                       \{
+12     pos=(1<<pos); 
+13     \textcolor{keywordflow}{if}(bits&pos) \{ 
+14         \textcolor{keywordflow}{return} 1;
+15     \}
+16     \textcolor{keywordflow}{else} \{
+17         \textcolor{keywordflow}{return} 0;
+18     \}
+19 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!show\+\_\+32\+\_\+bit\+\_\+data@{show\+\_\+32\+\_\+bit\+\_\+data}}
+\index{show\+\_\+32\+\_\+bit\+\_\+data@{show\+\_\+32\+\_\+bit\+\_\+data}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{show\+\_\+32\+\_\+bit\+\_\+data(uint32\+\_\+t data)}{show_32_bit_data(uint32_t data)}}]{\setlength{\rightskip}{0pt plus 5cm}void show\+\_\+32\+\_\+bit\+\_\+data (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_a4da719f1865290663e587ffb1b00744d}{}\label{Miscellaneous_8c_a4da719f1865290663e587ffb1b00744d}
+$<$ Read from M\+SB
+
+$<$ Read data at particular position
+
+$<$ Display 1
+
+$<$ Display 0 
+\begin{DoxyCode}
+96                                      \{
+97     \textcolor{keywordtype}{int} i;
+98     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)n'});
+99     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)r'});
+100     \textcolor{keywordflow}{for}(i=31; i>=0; i--) \{       
+101         \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a027b54125044a7b75a94ebdfef27ab46}{read\_32\_bit}(data,i)) \{ 
+102             \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'1'}); 
+103         \}
+104         \textcolor{keywordflow}{else} \{
+105             \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'0'}); 
+106         \}
+107     \}
+108     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)n'});
+109     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)r'});
+110 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!show\+\_\+8\+\_\+bit\+\_\+data@{show\+\_\+8\+\_\+bit\+\_\+data}}
+\index{show\+\_\+8\+\_\+bit\+\_\+data@{show\+\_\+8\+\_\+bit\+\_\+data}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{show\+\_\+8\+\_\+bit\+\_\+data(uint8\+\_\+t data)}{show_8_bit_data(uint8_t data)}}]{\setlength{\rightskip}{0pt plus 5cm}void show\+\_\+8\+\_\+bit\+\_\+data (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{data}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{}\label{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}
+$<$ Read from M\+SB
+
+$<$ Read data at particular position
+
+$<$ Display 1
+
+$<$ Display 0 
+\begin{DoxyCode}
+80                                    \{
+81     \textcolor{keywordtype}{int} i;
+82     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)n'});
+83     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)r'});
+84     \textcolor{keywordflow}{for}(i=7; i>=0; i--) \{       
+85         \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(data,i)) \{ 
+86             \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'1'}); 
+87         \}
+88         \textcolor{keywordflow}{else} \{
+89             \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'0'}); 
+90         \}
+91     \}
+92     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)n'});
+93     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)r'});
+94 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!show\+\_\+payload@{show\+\_\+payload}}
+\index{show\+\_\+payload@{show\+\_\+payload}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{show\+\_\+payload(uint8\+\_\+t $\ast$data, uint8\+\_\+t length)}{show_payload(uint8_t *data, uint8_t length)}}]{\setlength{\rightskip}{0pt plus 5cm}void show\+\_\+payload (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t $\ast$}]{data, }
+\item[{uint8\+\_\+t}]{length}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_a9ea1d4b6a27b5caa55c150b2ba17983a}{}\label{Miscellaneous_8c_a9ea1d4b6a27b5caa55c150b2ba17983a}
+
+
+Display payload message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & 8 bit unsigned character array \\
+\hline
+{\em length} & Length of the payload \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void nothing has to return 
+\end{DoxyReturn}
+$<$ Iterate over every element of the array
+
+$<$ Read from the M\+SB
+
+$<$ Display 1
+
+$<$ Display 0 
+\begin{DoxyCode}
+113                                                  \{
+114     \textcolor{keywordtype}{int} i,j;
+115     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)n'});
+116     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)r'});
+117     \textcolor{keywordflow}{for}(i=0; i<length/8; i++) \{ 
+118         \textcolor{keywordflow}{for}(j=7; j>=0; j--) \{ 
+119             \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a027b54125044a7b75a94ebdfef27ab46}{read\_32\_bit}(data[i],j)) \{
+120                 \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'1'}); 
+121             \}
+122             \textcolor{keywordflow}{else} \{
+123                 \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'0'}); 
+124             \}
+125         \}
+126     \}
+127     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)n'});
+128     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)r'});
+129 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!show\+Log@{show\+Log}}
+\index{show\+Log@{show\+Log}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{show\+Log(char msg[])}{showLog(char msg[])}}]{\setlength{\rightskip}{0pt plus 5cm}void show\+Log (
+\begin{DoxyParamCaption}
+\item[{char}]{msg\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{}\label{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}
+
+
+Display message consists of string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message for display in the minicom command line interface \\
+\hline
+{\em void} & nothing has to return from this function \\
+\hline
+\end{DoxyParams}
+$<$ Display message until getting the null value
+
+$<$ U\+A\+RT function to display message 
+\begin{DoxyCode}
+60                          \{
+61     \textcolor{keywordtype}{int} i=0;
+62     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)r'});
+63     \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(\textcolor{charliteral}{'\(\backslash\)n'});
+64     \textcolor{keywordflow}{for}(i=0; msg[i]!=\textcolor{charliteral}{'\(\backslash\)0'}; i++) \{ 
+65         \hyperlink{Miscellaneous_8h_ade3319d0c8a73744f47a483a8816cabe}{uart\_transmission}(msg[i]);
+67     \}
+68 
+69 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!write\+\_\+32\+\_\+bit@{write\+\_\+32\+\_\+bit}}
+\index{write\+\_\+32\+\_\+bit@{write\+\_\+32\+\_\+bit}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{write\+\_\+32\+\_\+bit(uint32\+\_\+t value, int pos, int value\+\_\+to\+\_\+write)}{write_32_bit(uint32_t value, int pos, int value_to_write)}}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t write\+\_\+32\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{uint32\+\_\+t}]{value, }
+\item[{int}]{pos, }
+\item[{int}]{value\+\_\+to\+\_\+write}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_a864fd2a5d36c61fdc91090a497784b55}{}\label{Miscellaneous_8c_a864fd2a5d36c61fdc91090a497784b55}
+
+
+Write in 32 bit unsigned integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The 32 bit integer to write to \\
+\hline
+{\em pos} & Write at particular position \\
+\hline
+{\em value\+\_\+to\+\_\+write} & int data which are 0 or 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint32\+\_\+t data 
+\end{DoxyReturn}
+$<$ Casting and left shift
+
+$<$ Casting and left shift
+
+$<$ When need to write 1
+
+$<$ Logical OR to set bit at particular position
+
+$<$ When need to write 0 
+\begin{DoxyCode}
+46                                                                   \{
+47     uint32\_t mask1,mask2;
+48     mask1=((uint32\_t)0x00000001) << pos; 
+49     mask2=((uint32\_t)0x00000000) << pos; 
+50     \textcolor{keywordflow}{if}(value\_to\_write==1) \{              
+51         value=value|mask1;               
+52     \}
+53     \textcolor{keywordflow}{else} \{
+54         value=value|mask2;               
+55     \}
+56 
+57     \textcolor{keywordflow}{return} value;
+58 \}
+\end{DoxyCode}
+\index{Miscellaneous.\+c@{Miscellaneous.\+c}!write\+\_\+8\+\_\+bit@{write\+\_\+8\+\_\+bit}}
+\index{write\+\_\+8\+\_\+bit@{write\+\_\+8\+\_\+bit}!Miscellaneous.\+c@{Miscellaneous.\+c}}
+\subsubsection[{\texorpdfstring{write\+\_\+8\+\_\+bit(uint8\+\_\+t value, int pos, int value\+\_\+to\+\_\+write)}{write_8_bit(uint8_t value, int pos, int value_to_write)}}]{\setlength{\rightskip}{0pt plus 5cm}uint8\+\_\+t write\+\_\+8\+\_\+bit (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{value, }
+\item[{int}]{pos, }
+\item[{int}]{value\+\_\+to\+\_\+write}
+\end{DoxyParamCaption}
+)}\hypertarget{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}{}\label{Miscellaneous_8c_af81f6965e50b219ff38ea272019bac1f}
+
+
+Write in 8 bit unsigned integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The 8 bit integer to write to \\
+\hline
+{\em pos} & Write at particular position \\
+\hline
+{\em value\+\_\+to\+\_\+write} & int data which are 0 or 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t data 
+\end{DoxyReturn}
+$<$ Casting and left shift
+
+$<$ Casting and left shift
+
+$<$ When need to write 1
+
+$<$ Logical OR to set bit at particular position
+
+$<$ When need to write 0 
+\begin{DoxyCode}
+32                                                                \{
+33     uint8\_t mask1,mask2;
+34     mask1=((uint8\_t)1)<<pos; 
+35     mask2=((uint8\_t)0)<<pos; 
+36     \textcolor{keywordflow}{if}(value\_to\_write==1) \{  
+37         value=value|mask1;   
+38     \}
+39     \textcolor{keywordflow}{else} \{
+40         value=value|mask2;  
+41     \}
+42 
+43     \textcolor{keywordflow}{return} value;
+44 \}
+\end{DoxyCode}

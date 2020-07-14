@@ -1,0 +1,131 @@
+\hypertarget{initialization_8h}{}\section{Rasp\+Net/\+Main and Others/initialization.h File Reference}
+\label{initialization_8h}\index{Rasp\+Net/\+Main and Others/initialization.\+h@{Rasp\+Net/\+Main and Others/initialization.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{initialization_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{initialization_8h_a96e7bed13a0aabf62cd82cb63d0ecdcd}{port\+\_\+initialization} ()
+\begin{DoxyCompactList}\small\item\em A\+VR port and pin initialization for input and output purpose. \end{DoxyCompactList}\item 
+void \hyperlink{initialization_8h_aa76e84afd914db298418b16267fff5a1}{uart\+\_\+initialization} ()
+\begin{DoxyCompactList}\small\item\em U\+A\+RT initialization for serial communication. \end{DoxyCompactList}\item 
+void \hyperlink{initialization_8h_a2894de6d2d350b25a70f8cc225768581}{timer\+\_\+interrupt\+\_\+initialization} ()
+\begin{DoxyCompactList}\small\item\em Timer register initialization for Timer Interrupt. \end{DoxyCompactList}\item 
+void \hyperlink{initialization_8h_acdf613f8022f5390f71cfeb1e84885c7}{pin\+\_\+change\+\_\+interrupt\+\_\+initialization} ()
+\begin{DoxyCompactList}\small\item\em P\+IN change interrupt initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{initialization.\+h@{initialization.\+h}!pin\+\_\+change\+\_\+interrupt\+\_\+initialization@{pin\+\_\+change\+\_\+interrupt\+\_\+initialization}}
+\index{pin\+\_\+change\+\_\+interrupt\+\_\+initialization@{pin\+\_\+change\+\_\+interrupt\+\_\+initialization}!initialization.\+h@{initialization.\+h}}
+\subsubsection[{\texorpdfstring{pin\+\_\+change\+\_\+interrupt\+\_\+initialization()}{pin_change_interrupt_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void pin\+\_\+change\+\_\+interrupt\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8h_acdf613f8022f5390f71cfeb1e84885c7}{}\label{initialization_8h_acdf613f8022f5390f71cfeb1e84885c7}
+
+
+P\+IN change interrupt initialization. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function
+\end{DoxyReturn}
+P\+IN Change interrupt is used for receiving data $<$ enabled P\+C\+I\+NT\mbox{[}23\+:16\mbox{]} pin will cause an interrupt
+
+$<$ pin change interrupt for P\+D4 or clock receive signal 
+\begin{DoxyCode}
+50                                           \{
+51   PCICR|= (1<<PCIE2); 
+52   PCMSK2|=(1<<PCINT20);
+53 \}
+\end{DoxyCode}
+\index{initialization.\+h@{initialization.\+h}!port\+\_\+initialization@{port\+\_\+initialization}}
+\index{port\+\_\+initialization@{port\+\_\+initialization}!initialization.\+h@{initialization.\+h}}
+\subsubsection[{\texorpdfstring{port\+\_\+initialization()}{port_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void port\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8h_a96e7bed13a0aabf62cd82cb63d0ecdcd}{}\label{initialization_8h_a96e7bed13a0aabf62cd82cb63d0ecdcd}
+
+
+A\+VR port and pin initialization for input and output purpose. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ Receive P\+IN Configuration
+
+$<$ Clock Receive
+
+$<$ Data Receive
+
+$<$ Send P\+IN configuration
+
+$<$ Clock Send
+
+$<$ Data Send
+
+$<$ L\+ED output
+
+$<$ to indicate clock signal receive
+
+$<$ to indicate data signal receive 
+\begin{DoxyCode}
+7                           \{
+9     DDRD&=~(1<<PD4);
+10     DDRD&=~(1<<PD5);
+13     DDRB|=(1<<PB4);
+14     DDRB|=(1<<PB5);
+17     DDRB|=(1<<PB3);
+18     DDRB|=(1<<PB2);
+19 \}
+\end{DoxyCode}
+\index{initialization.\+h@{initialization.\+h}!timer\+\_\+interrupt\+\_\+initialization@{timer\+\_\+interrupt\+\_\+initialization}}
+\index{timer\+\_\+interrupt\+\_\+initialization@{timer\+\_\+interrupt\+\_\+initialization}!initialization.\+h@{initialization.\+h}}
+\subsubsection[{\texorpdfstring{timer\+\_\+interrupt\+\_\+initialization()}{timer_interrupt_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void timer\+\_\+interrupt\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8h_a2894de6d2d350b25a70f8cc225768581}{}\label{initialization_8h_a2894de6d2d350b25a70f8cc225768581}
+
+
+Timer register initialization for Timer Interrupt. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+\index{initialization.\+h@{initialization.\+h}!uart\+\_\+initialization@{uart\+\_\+initialization}}
+\index{uart\+\_\+initialization@{uart\+\_\+initialization}!initialization.\+h@{initialization.\+h}}
+\subsubsection[{\texorpdfstring{uart\+\_\+initialization()}{uart_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void uart\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8h_aa76e84afd914db298418b16267fff5a1}{}\label{initialization_8h_aa76e84afd914db298418b16267fff5a1}
+
+
+U\+A\+RT initialization for serial communication. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ Set baud rate U\+B\+RR is a 16 bit register which is used to set the baud rate of U\+A\+RT
+
+$<$ Transmitter and Receiver is Enabled T\+X\+EN bit 1 Enable Transmission 0 Disable Transmission R\+X\+EN bit 1 Enable Reception 0 Disable Reception
+
+$<$ U\+C\+S\+Z0 and U\+C\+S\+Z1 are used to select the number of data bits to be transmitter
+
+$<$ Asynchornous mode 
+\begin{DoxyCode}
+21                           \{
+26     UBRR0H =  (\textcolor{keywordtype}{unsigned} char)\hyperlink{UART__Handler_8h_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE}>>8;
+27     UBRR0L =  (\textcolor{keywordtype}{unsigned} char)\hyperlink{UART__Handler_8h_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE};
+32     UCSR0B|= (1<<TXEN0)|(1<<RXEN0);
+36     UCSR0C|= (1<<USBS0)|(3<<UCSZ00); 
+39 \}
+\end{DoxyCode}

@@ -1,0 +1,147 @@
+\hypertarget{initialization_8c}{}\section{Rasp\+Net/\+Main and Others/initialization.c File Reference}
+\label{initialization_8c}\index{Rasp\+Net/\+Main and Others/initialization.\+c@{Rasp\+Net/\+Main and Others/initialization.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}initialization.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}U\+A\+R\+T\+\_\+\+Handler.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\\*
+Include dependency graph for initialization.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{initialization_8c__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{initialization_8c__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{initialization_8c_a96e7bed13a0aabf62cd82cb63d0ecdcd}{port\+\_\+initialization} ()
+\begin{DoxyCompactList}\small\item\em A\+VR port and pin initialization for input and output purpose. \end{DoxyCompactList}\item 
+void \hyperlink{initialization_8c_aa76e84afd914db298418b16267fff5a1}{uart\+\_\+initialization} ()
+\begin{DoxyCompactList}\small\item\em U\+A\+RT initialization for serial communication. \end{DoxyCompactList}\item 
+void \hyperlink{initialization_8c_af18d14573a8ed7aa3bacc5d77011e423}{timer\+\_\+initialization} ()
+\item 
+void \hyperlink{initialization_8c_acdf613f8022f5390f71cfeb1e84885c7}{pin\+\_\+change\+\_\+interrupt\+\_\+initialization} ()
+\begin{DoxyCompactList}\small\item\em P\+IN change interrupt initialization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{initialization.\+c@{initialization.\+c}!pin\+\_\+change\+\_\+interrupt\+\_\+initialization@{pin\+\_\+change\+\_\+interrupt\+\_\+initialization}}
+\index{pin\+\_\+change\+\_\+interrupt\+\_\+initialization@{pin\+\_\+change\+\_\+interrupt\+\_\+initialization}!initialization.\+c@{initialization.\+c}}
+\subsubsection[{\texorpdfstring{pin\+\_\+change\+\_\+interrupt\+\_\+initialization()}{pin_change_interrupt_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void pin\+\_\+change\+\_\+interrupt\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8c_acdf613f8022f5390f71cfeb1e84885c7}{}\label{initialization_8c_acdf613f8022f5390f71cfeb1e84885c7}
+
+
+P\+IN change interrupt initialization. 
+
+P\+IN Change interrupt is used for receiving data $<$ enabled P\+C\+I\+NT\mbox{[}23\+:16\mbox{]} pin will cause an interrupt
+
+$<$ pin change interrupt for P\+D4 or clock receive signal 
+\begin{DoxyCode}
+50                                           \{
+51   PCICR|= (1<<PCIE2); 
+52   PCMSK2|=(1<<PCINT20);
+53 \}
+\end{DoxyCode}
+\index{initialization.\+c@{initialization.\+c}!port\+\_\+initialization@{port\+\_\+initialization}}
+\index{port\+\_\+initialization@{port\+\_\+initialization}!initialization.\+c@{initialization.\+c}}
+\subsubsection[{\texorpdfstring{port\+\_\+initialization()}{port_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void port\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8c_a96e7bed13a0aabf62cd82cb63d0ecdcd}{}\label{initialization_8c_a96e7bed13a0aabf62cd82cb63d0ecdcd}
+
+
+A\+VR port and pin initialization for input and output purpose. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ Receive P\+IN Configuration
+
+$<$ Clock Receive
+
+$<$ Data Receive
+
+$<$ Send P\+IN configuration
+
+$<$ Clock Send
+
+$<$ Data Send
+
+$<$ L\+ED output
+
+$<$ to indicate clock signal receive
+
+$<$ to indicate data signal receive 
+\begin{DoxyCode}
+7                           \{
+9     DDRD&=~(1<<PD4);
+10     DDRD&=~(1<<PD5);
+13     DDRB|=(1<<PB4);
+14     DDRB|=(1<<PB5);
+17     DDRB|=(1<<PB3);
+18     DDRB|=(1<<PB2);
+19 \}
+\end{DoxyCode}
+\index{initialization.\+c@{initialization.\+c}!timer\+\_\+initialization@{timer\+\_\+initialization}}
+\index{timer\+\_\+initialization@{timer\+\_\+initialization}!initialization.\+c@{initialization.\+c}}
+\subsubsection[{\texorpdfstring{timer\+\_\+initialization()}{timer_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void timer\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8c_af18d14573a8ed7aa3bacc5d77011e423}{}\label{initialization_8c_af18d14573a8ed7aa3bacc5d77011e423}
+$<$ Compare match A
+
+$<$ C\+TC mode
+
+$<$ Clock/256 = 46875 (prescalar 256) 
+\begin{DoxyCode}
+42                            \{
+43     TIMSK0 |= (1 << OCIE0A); 
+44     TCCR0A |= (1 << WGM01);  
+45     TCCR0B |= (1 << CS02);   \textcolor{comment}{//}
+46     OCR0A = 0x2f;
+47     \textcolor{comment}{//OCR0A = 0x600;}
+48 \}
+\end{DoxyCode}
+\index{initialization.\+c@{initialization.\+c}!uart\+\_\+initialization@{uart\+\_\+initialization}}
+\index{uart\+\_\+initialization@{uart\+\_\+initialization}!initialization.\+c@{initialization.\+c}}
+\subsubsection[{\texorpdfstring{uart\+\_\+initialization()}{uart_initialization()}}]{\setlength{\rightskip}{0pt plus 5cm}void uart\+\_\+initialization (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{initialization_8c_aa76e84afd914db298418b16267fff5a1}{}\label{initialization_8c_aa76e84afd914db298418b16267fff5a1}
+
+
+U\+A\+RT initialization for serial communication. 
+
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ Set baud rate U\+B\+RR is a 16 bit register which is used to set the baud rate of U\+A\+RT
+
+$<$ Transmitter and Receiver is Enabled T\+X\+EN bit 1 Enable Transmission 0 Disable Transmission R\+X\+EN bit 1 Enable Reception 0 Disable Reception
+
+$<$ U\+C\+S\+Z0 and U\+C\+S\+Z1 are used to select the number of data bits to be transmitter
+
+$<$ Asynchornous mode 
+\begin{DoxyCode}
+21                           \{
+26     UBRR0H =  (\textcolor{keywordtype}{unsigned} char)\hyperlink{UART__Handler_8h_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE}>>8;
+27     UBRR0L =  (\textcolor{keywordtype}{unsigned} char)\hyperlink{UART__Handler_8h_a734bbab06e1a9fd2e5522db0221ff6e3}{BAUDRATE};
+32     UCSR0B|= (1<<TXEN0)|(1<<RXEN0);
+36     UCSR0C|= (1<<USBS0)|(3<<UCSZ00); 
+39 \}
+\end{DoxyCode}

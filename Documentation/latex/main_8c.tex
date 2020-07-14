@@ -1,0 +1,98 @@
+\hypertarget{main_8c}{}\section{Rasp\+Net/\+Main and Others/main.c File Reference}
+\label{main_8c}\index{Rasp\+Net/\+Main and Others/main.\+c@{Rasp\+Net/\+Main and Others/main.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include $<$util/delay.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}initialization.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\+I\+N\+\_\+\+Change\+\_\+\+Interrupt\+\_\+\+Handler.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Layer3.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Buffer.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Miscellaneous.\+c\char`\"{}}\\*
+Include dependency graph for main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}{F\+\_\+\+C\+PU}~16000000\+UL
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{main.\+c@{main.\+c}!F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}}
+\index{F\+\_\+\+C\+PU@{F\+\_\+\+C\+PU}!main.\+c@{main.\+c}}
+\subsubsection[{\texorpdfstring{F\+\_\+\+C\+PU}{F_CPU}}]{\setlength{\rightskip}{0pt plus 5cm}\#define F\+\_\+\+C\+PU~16000000\+UL}\hypertarget{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}{}\label{main_8c_a43bafb28b29491ec7f871319b5a3b2f8}
+
+
+\subsection{Function Documentation}
+\index{main.\+c@{main.\+c}!main@{main}}
+\index{main@{main}!main.\+c@{main.\+c}}
+\subsubsection[{\texorpdfstring{main()}{main()}}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{}\label{main_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}
+$<$ Initialization
+
+$<$ Global interrupt
+
+$<$ Fill with payload data
+
+$<$ Fill buffer with predefined data 
+\begin{DoxyCode}
+13           \{
+15     \hyperlink{initialization_8c_a96e7bed13a0aabf62cd82cb63d0ecdcd}{port\_initialization}();
+16     \hyperlink{initialization_8c_aa76e84afd914db298418b16267fff5a1}{uart\_initialization}();
+17     \hyperlink{PIN__Change__Interrupt__Handler_8c_acdf613f8022f5390f71cfeb1e84885c7}{pin\_change\_interrupt\_initialization}();
+18     \hyperlink{initialization_8c_af18d14573a8ed7aa3bacc5d77011e423}{timer\_initialization}();
+19     sei();
+23     \hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}=&transmit\_packet;
+24     \hyperlink{Buffer_8c_a60b199d535890694c3b1f82494e64e6d}{receive\_packet\_pointer}=&receive\_packet;
+25     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}=&my\_own\_packet;
+26     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source}=0x3;
+27     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination}=0x4;
+28     uint8\_t payload\_data[6]=\{\hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->
+      \hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination},\hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source},0x74,0x65,0x73,0x74\}; 
+31     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble}=
+      \hyperlink{Buffer_8c_ad32f9b2a3c3f3aba80f847dd8c18f77c}{predefined\_preamble};
+32     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[0]=payload\_data[0];
+33     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[1]=payload\_data[1];
+34     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[2]=payload\_data[2];
+35     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[3]=payload\_data[3];
+36     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[4]=payload\_data[4];
+37     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[5]=payload\_data[5];
+38     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz}= 0x6;
+39     \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc}=\hyperlink{CRC_8c_a80a6d5b0482ae9760e75c021a70a4ce1}{CRC\_Computation}(
+      \hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->\hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload},\hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer}->
+      \hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz});
+40     \hyperlink{PIN__Change__Interrupt__Handler_8c_a7931d58a3bd94b4566da60f28597d922}{receiver\_flag}=\hyperlink{Layer3_8h_aa8ef63ae0468c77b8312b92d7154609d}{receive\_preamble};
+41 
+42     \textcolor{keywordflow}{while}(1)\{
+43 
+44 
+45         \textcolor{keywordflow}{while}((\hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}==\hyperlink{Layer3_8h_aaccf0a951ca84ac3578fa3bcfbac5522}{priority\_for\_relay})||(
+      \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}==\hyperlink{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{priority\_for\_sending\_order})||(
+      \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}==\hyperlink{Layer3_8h_a4a793a607f3e830119fe598d76630898}{priority\_high}));
+46         \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"------------------------------Rafiqul Islam-----------------------"});
+47         \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{priority\_for\_sending\_order};
+48         *\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}= *\hyperlink{Buffer_8c_ac247c7d61e5a6e7abecd95209dae8bcb}{my\_own\_packet\_pointer};
+49         \hyperlink{PIN__Change__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{transmit\_preamble};
+50         \textcolor{comment}{//\_delay\_ms(100);}
+51 
+52 
+53 
+54     \}
+55 
+56     \textcolor{keywordflow}{return} 0;
+57 \}
+\end{DoxyCode}

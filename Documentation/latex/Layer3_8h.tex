@@ -1,0 +1,270 @@
+\hypertarget{Layer3_8h}{}\section{Rasp\+Net/\+Layer 3/\+Layer3.h File Reference}
+\label{Layer3_8h}\index{Rasp\+Net/\+Layer 3/\+Layer3.\+h@{Rasp\+Net/\+Layer 3/\+Layer3.\+h}}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Layer3_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\+\_\+own\+\_\+id}~1
+\item 
+\#define \hyperlink{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{broadcasting\+\_\+id}~0
+\item 
+\#define \hyperlink{Layer3_8h_afd5191a3ada0a4968402449c806bd4b3}{priority\+\_\+normal}~21
+\item 
+\#define \hyperlink{Layer3_8h_aaccf0a951ca84ac3578fa3bcfbac5522}{priority\+\_\+for\+\_\+relay}~22
+\item 
+\#define \hyperlink{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{priority\+\_\+for\+\_\+sending\+\_\+order}~23
+\item 
+\#define \hyperlink{Layer3_8h_a4a793a607f3e830119fe598d76630898}{priority\+\_\+high}~24
+\item 
+\#define \hyperlink{Layer3_8h_ab7153c7289145c9aab31e838d3f29b0f}{return\+\_\+my\+\_\+own\+\_\+msg}~101
+\item 
+\#define \hyperlink{Layer3_8h_a58352e6aa962709f6a002dbc21406113}{my\+\_\+own\+\_\+braodcasting\+\_\+msg}~102
+\item 
+\#define \hyperlink{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}{broadcasting\+\_\+msg}~103
+\item 
+\#define \hyperlink{Layer3_8h_a465792308892364b6fd0d58cf45b6043}{msg\+\_\+send\+\_\+to\+\_\+me}~104
+\item 
+\#define \hyperlink{Layer3_8h_a8aa9037a9afe926a10f769adc957936a}{msg\+\_\+send\+\_\+to\+\_\+other\+\_\+node}~105
+\item 
+\#define \hyperlink{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}{unknown}~-\/111
+\item 
+\#define \hyperlink{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{transmit\+\_\+preamble}~31
+\item 
+\#define \hyperlink{Layer3_8h_a44e78cb310dd2d291b3d3f96c2a4fbf3}{transmit\+\_\+destination\+\_\+address}~32
+\item 
+\#define \hyperlink{Layer3_8h_aa4e2ceb5bd48f2fde7e6c7240ca66e44}{transmit\+\_\+source\+\_\+address}~33
+\item 
+\#define \hyperlink{Layer3_8h_a97826fb6e7415b7cca5b6f704b2c37fc}{transmit\+\_\+crc}~34
+\item 
+\#define \hyperlink{Layer3_8h_a6b4b30550290df6d0f6c7726714672bf}{transmit\+\_\+payload\+\_\+size}~35
+\item 
+\#define \hyperlink{Layer3_8h_afde148ebf464f31e83576556e5bc4102}{transmit\+\_\+payload}~36
+\item 
+\#define \hyperlink{Layer3_8h_af43b7652801ee9e083162514d5372e9f}{transmitted}~37
+\item 
+\#define \hyperlink{Layer3_8h_aa8ef63ae0468c77b8312b92d7154609d}{receive\+\_\+preamble}~41
+\item 
+\#define \hyperlink{Layer3_8h_a39e1380303eff462d17201a4cd077b31}{receive\+\_\+destination\+\_\+address}~42
+\item 
+\#define \hyperlink{Layer3_8h_ace2bdbcd80ee617b80126b378b51dfe3}{receive\+\_\+source\+\_\+address}~43
+\item 
+\#define \hyperlink{Layer3_8h_aa59256b98f189dbcee223214dfde1c49}{receive\+\_\+crc}~44
+\item 
+\#define \hyperlink{Layer3_8h_a1c9fabd7b0478766bb4b611e5dbe8853}{receive\+\_\+payload\+\_\+size}~45
+\item 
+\#define \hyperlink{Layer3_8h_a8fc3575b730c4bc458cdce87537175d1}{receive\+\_\+payload}~46
+\item 
+\#define \hyperlink{Layer3_8h_ae248a94ed37c2d8dad80d8a627ad9974}{received\+\_\+crc\+\_\+check}~47
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Layer3_8h_a5cc35a45674625cd8733379d3f0523b8}{discard\+\_\+packet} (struct \hyperlink{structPacket}{Packet} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em This function is used to delete packet. \end{DoxyCompactList}\item 
+int \hyperlink{Layer3_8h_a23b38c7493fb43e33264c3972782f496}{type\+\_\+of\+\_\+msg} (struct \hyperlink{structPacket}{Packet} $\ast$packet)
+\begin{DoxyCompactList}\small\item\em This function is used to detect the type of message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\+\_\+type}
+\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{Layer3.\+h@{Layer3.\+h}!broadcasting\+\_\+id@{broadcasting\+\_\+id}}
+\index{broadcasting\+\_\+id@{broadcasting\+\_\+id}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{broadcasting\+\_\+id}{broadcasting_id}}]{\setlength{\rightskip}{0pt plus 5cm}\#define broadcasting\+\_\+id~0}\hypertarget{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{}\label{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}
+\index{Layer3.\+h@{Layer3.\+h}!broadcasting\+\_\+msg@{broadcasting\+\_\+msg}}
+\index{broadcasting\+\_\+msg@{broadcasting\+\_\+msg}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{broadcasting\+\_\+msg}{broadcasting_msg}}]{\setlength{\rightskip}{0pt plus 5cm}\#define broadcasting\+\_\+msg~103}\hypertarget{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}{}\label{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}
+\index{Layer3.\+h@{Layer3.\+h}!msg\+\_\+send\+\_\+to\+\_\+me@{msg\+\_\+send\+\_\+to\+\_\+me}}
+\index{msg\+\_\+send\+\_\+to\+\_\+me@{msg\+\_\+send\+\_\+to\+\_\+me}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{msg\+\_\+send\+\_\+to\+\_\+me}{msg_send_to_me}}]{\setlength{\rightskip}{0pt plus 5cm}\#define msg\+\_\+send\+\_\+to\+\_\+me~104}\hypertarget{Layer3_8h_a465792308892364b6fd0d58cf45b6043}{}\label{Layer3_8h_a465792308892364b6fd0d58cf45b6043}
+\index{Layer3.\+h@{Layer3.\+h}!msg\+\_\+send\+\_\+to\+\_\+other\+\_\+node@{msg\+\_\+send\+\_\+to\+\_\+other\+\_\+node}}
+\index{msg\+\_\+send\+\_\+to\+\_\+other\+\_\+node@{msg\+\_\+send\+\_\+to\+\_\+other\+\_\+node}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{msg\+\_\+send\+\_\+to\+\_\+other\+\_\+node}{msg_send_to_other_node}}]{\setlength{\rightskip}{0pt plus 5cm}\#define msg\+\_\+send\+\_\+to\+\_\+other\+\_\+node~105}\hypertarget{Layer3_8h_a8aa9037a9afe926a10f769adc957936a}{}\label{Layer3_8h_a8aa9037a9afe926a10f769adc957936a}
+\index{Layer3.\+h@{Layer3.\+h}!my\+\_\+own\+\_\+braodcasting\+\_\+msg@{my\+\_\+own\+\_\+braodcasting\+\_\+msg}}
+\index{my\+\_\+own\+\_\+braodcasting\+\_\+msg@{my\+\_\+own\+\_\+braodcasting\+\_\+msg}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{my\+\_\+own\+\_\+braodcasting\+\_\+msg}{my_own_braodcasting_msg}}]{\setlength{\rightskip}{0pt plus 5cm}\#define my\+\_\+own\+\_\+braodcasting\+\_\+msg~102}\hypertarget{Layer3_8h_a58352e6aa962709f6a002dbc21406113}{}\label{Layer3_8h_a58352e6aa962709f6a002dbc21406113}
+\index{Layer3.\+h@{Layer3.\+h}!my\+\_\+own\+\_\+id@{my\+\_\+own\+\_\+id}}
+\index{my\+\_\+own\+\_\+id@{my\+\_\+own\+\_\+id}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{my\+\_\+own\+\_\+id}{my_own_id}}]{\setlength{\rightskip}{0pt plus 5cm}\#define my\+\_\+own\+\_\+id~1}\hypertarget{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{}\label{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}
+\index{Layer3.\+h@{Layer3.\+h}!priority\+\_\+for\+\_\+relay@{priority\+\_\+for\+\_\+relay}}
+\index{priority\+\_\+for\+\_\+relay@{priority\+\_\+for\+\_\+relay}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{priority\+\_\+for\+\_\+relay}{priority_for_relay}}]{\setlength{\rightskip}{0pt plus 5cm}\#define priority\+\_\+for\+\_\+relay~22}\hypertarget{Layer3_8h_aaccf0a951ca84ac3578fa3bcfbac5522}{}\label{Layer3_8h_aaccf0a951ca84ac3578fa3bcfbac5522}
+\index{Layer3.\+h@{Layer3.\+h}!priority\+\_\+for\+\_\+sending\+\_\+order@{priority\+\_\+for\+\_\+sending\+\_\+order}}
+\index{priority\+\_\+for\+\_\+sending\+\_\+order@{priority\+\_\+for\+\_\+sending\+\_\+order}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{priority\+\_\+for\+\_\+sending\+\_\+order}{priority_for_sending_order}}]{\setlength{\rightskip}{0pt plus 5cm}\#define priority\+\_\+for\+\_\+sending\+\_\+order~23}\hypertarget{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{}\label{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}
+\index{Layer3.\+h@{Layer3.\+h}!priority\+\_\+high@{priority\+\_\+high}}
+\index{priority\+\_\+high@{priority\+\_\+high}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{priority\+\_\+high}{priority_high}}]{\setlength{\rightskip}{0pt plus 5cm}\#define priority\+\_\+high~24}\hypertarget{Layer3_8h_a4a793a607f3e830119fe598d76630898}{}\label{Layer3_8h_a4a793a607f3e830119fe598d76630898}
+\index{Layer3.\+h@{Layer3.\+h}!priority\+\_\+normal@{priority\+\_\+normal}}
+\index{priority\+\_\+normal@{priority\+\_\+normal}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{priority\+\_\+normal}{priority_normal}}]{\setlength{\rightskip}{0pt plus 5cm}\#define priority\+\_\+normal~21}\hypertarget{Layer3_8h_afd5191a3ada0a4968402449c806bd4b3}{}\label{Layer3_8h_afd5191a3ada0a4968402449c806bd4b3}
+\index{Layer3.\+h@{Layer3.\+h}!receive\+\_\+crc@{receive\+\_\+crc}}
+\index{receive\+\_\+crc@{receive\+\_\+crc}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{receive\+\_\+crc}{receive_crc}}]{\setlength{\rightskip}{0pt plus 5cm}\#define receive\+\_\+crc~44}\hypertarget{Layer3_8h_aa59256b98f189dbcee223214dfde1c49}{}\label{Layer3_8h_aa59256b98f189dbcee223214dfde1c49}
+\index{Layer3.\+h@{Layer3.\+h}!receive\+\_\+destination\+\_\+address@{receive\+\_\+destination\+\_\+address}}
+\index{receive\+\_\+destination\+\_\+address@{receive\+\_\+destination\+\_\+address}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{receive\+\_\+destination\+\_\+address}{receive_destination_address}}]{\setlength{\rightskip}{0pt plus 5cm}\#define receive\+\_\+destination\+\_\+address~42}\hypertarget{Layer3_8h_a39e1380303eff462d17201a4cd077b31}{}\label{Layer3_8h_a39e1380303eff462d17201a4cd077b31}
+\index{Layer3.\+h@{Layer3.\+h}!receive\+\_\+payload@{receive\+\_\+payload}}
+\index{receive\+\_\+payload@{receive\+\_\+payload}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{receive\+\_\+payload}{receive_payload}}]{\setlength{\rightskip}{0pt plus 5cm}\#define receive\+\_\+payload~46}\hypertarget{Layer3_8h_a8fc3575b730c4bc458cdce87537175d1}{}\label{Layer3_8h_a8fc3575b730c4bc458cdce87537175d1}
+\index{Layer3.\+h@{Layer3.\+h}!receive\+\_\+payload\+\_\+size@{receive\+\_\+payload\+\_\+size}}
+\index{receive\+\_\+payload\+\_\+size@{receive\+\_\+payload\+\_\+size}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{receive\+\_\+payload\+\_\+size}{receive_payload_size}}]{\setlength{\rightskip}{0pt plus 5cm}\#define receive\+\_\+payload\+\_\+size~45}\hypertarget{Layer3_8h_a1c9fabd7b0478766bb4b611e5dbe8853}{}\label{Layer3_8h_a1c9fabd7b0478766bb4b611e5dbe8853}
+\index{Layer3.\+h@{Layer3.\+h}!receive\+\_\+preamble@{receive\+\_\+preamble}}
+\index{receive\+\_\+preamble@{receive\+\_\+preamble}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{receive\+\_\+preamble}{receive_preamble}}]{\setlength{\rightskip}{0pt plus 5cm}\#define receive\+\_\+preamble~41}\hypertarget{Layer3_8h_aa8ef63ae0468c77b8312b92d7154609d}{}\label{Layer3_8h_aa8ef63ae0468c77b8312b92d7154609d}
+\index{Layer3.\+h@{Layer3.\+h}!receive\+\_\+source\+\_\+address@{receive\+\_\+source\+\_\+address}}
+\index{receive\+\_\+source\+\_\+address@{receive\+\_\+source\+\_\+address}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{receive\+\_\+source\+\_\+address}{receive_source_address}}]{\setlength{\rightskip}{0pt plus 5cm}\#define receive\+\_\+source\+\_\+address~43}\hypertarget{Layer3_8h_ace2bdbcd80ee617b80126b378b51dfe3}{}\label{Layer3_8h_ace2bdbcd80ee617b80126b378b51dfe3}
+\index{Layer3.\+h@{Layer3.\+h}!received\+\_\+crc\+\_\+check@{received\+\_\+crc\+\_\+check}}
+\index{received\+\_\+crc\+\_\+check@{received\+\_\+crc\+\_\+check}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{received\+\_\+crc\+\_\+check}{received_crc_check}}]{\setlength{\rightskip}{0pt plus 5cm}\#define received\+\_\+crc\+\_\+check~47}\hypertarget{Layer3_8h_ae248a94ed37c2d8dad80d8a627ad9974}{}\label{Layer3_8h_ae248a94ed37c2d8dad80d8a627ad9974}
+\index{Layer3.\+h@{Layer3.\+h}!return\+\_\+my\+\_\+own\+\_\+msg@{return\+\_\+my\+\_\+own\+\_\+msg}}
+\index{return\+\_\+my\+\_\+own\+\_\+msg@{return\+\_\+my\+\_\+own\+\_\+msg}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{return\+\_\+my\+\_\+own\+\_\+msg}{return_my_own_msg}}]{\setlength{\rightskip}{0pt plus 5cm}\#define return\+\_\+my\+\_\+own\+\_\+msg~101}\hypertarget{Layer3_8h_ab7153c7289145c9aab31e838d3f29b0f}{}\label{Layer3_8h_ab7153c7289145c9aab31e838d3f29b0f}
+\index{Layer3.\+h@{Layer3.\+h}!transmit\+\_\+crc@{transmit\+\_\+crc}}
+\index{transmit\+\_\+crc@{transmit\+\_\+crc}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{transmit\+\_\+crc}{transmit_crc}}]{\setlength{\rightskip}{0pt plus 5cm}\#define transmit\+\_\+crc~34}\hypertarget{Layer3_8h_a97826fb6e7415b7cca5b6f704b2c37fc}{}\label{Layer3_8h_a97826fb6e7415b7cca5b6f704b2c37fc}
+\index{Layer3.\+h@{Layer3.\+h}!transmit\+\_\+destination\+\_\+address@{transmit\+\_\+destination\+\_\+address}}
+\index{transmit\+\_\+destination\+\_\+address@{transmit\+\_\+destination\+\_\+address}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{transmit\+\_\+destination\+\_\+address}{transmit_destination_address}}]{\setlength{\rightskip}{0pt plus 5cm}\#define transmit\+\_\+destination\+\_\+address~32}\hypertarget{Layer3_8h_a44e78cb310dd2d291b3d3f96c2a4fbf3}{}\label{Layer3_8h_a44e78cb310dd2d291b3d3f96c2a4fbf3}
+\index{Layer3.\+h@{Layer3.\+h}!transmit\+\_\+payload@{transmit\+\_\+payload}}
+\index{transmit\+\_\+payload@{transmit\+\_\+payload}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{transmit\+\_\+payload}{transmit_payload}}]{\setlength{\rightskip}{0pt plus 5cm}\#define transmit\+\_\+payload~36}\hypertarget{Layer3_8h_afde148ebf464f31e83576556e5bc4102}{}\label{Layer3_8h_afde148ebf464f31e83576556e5bc4102}
+\index{Layer3.\+h@{Layer3.\+h}!transmit\+\_\+payload\+\_\+size@{transmit\+\_\+payload\+\_\+size}}
+\index{transmit\+\_\+payload\+\_\+size@{transmit\+\_\+payload\+\_\+size}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{transmit\+\_\+payload\+\_\+size}{transmit_payload_size}}]{\setlength{\rightskip}{0pt plus 5cm}\#define transmit\+\_\+payload\+\_\+size~35}\hypertarget{Layer3_8h_a6b4b30550290df6d0f6c7726714672bf}{}\label{Layer3_8h_a6b4b30550290df6d0f6c7726714672bf}
+\index{Layer3.\+h@{Layer3.\+h}!transmit\+\_\+preamble@{transmit\+\_\+preamble}}
+\index{transmit\+\_\+preamble@{transmit\+\_\+preamble}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{transmit\+\_\+preamble}{transmit_preamble}}]{\setlength{\rightskip}{0pt plus 5cm}\#define transmit\+\_\+preamble~31}\hypertarget{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{}\label{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}
+\index{Layer3.\+h@{Layer3.\+h}!transmit\+\_\+source\+\_\+address@{transmit\+\_\+source\+\_\+address}}
+\index{transmit\+\_\+source\+\_\+address@{transmit\+\_\+source\+\_\+address}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{transmit\+\_\+source\+\_\+address}{transmit_source_address}}]{\setlength{\rightskip}{0pt plus 5cm}\#define transmit\+\_\+source\+\_\+address~33}\hypertarget{Layer3_8h_aa4e2ceb5bd48f2fde7e6c7240ca66e44}{}\label{Layer3_8h_aa4e2ceb5bd48f2fde7e6c7240ca66e44}
+\index{Layer3.\+h@{Layer3.\+h}!transmitted@{transmitted}}
+\index{transmitted@{transmitted}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{transmitted}{transmitted}}]{\setlength{\rightskip}{0pt plus 5cm}\#define transmitted~37}\hypertarget{Layer3_8h_af43b7652801ee9e083162514d5372e9f}{}\label{Layer3_8h_af43b7652801ee9e083162514d5372e9f}
+\index{Layer3.\+h@{Layer3.\+h}!unknown@{unknown}}
+\index{unknown@{unknown}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{unknown}{unknown}}]{\setlength{\rightskip}{0pt plus 5cm}\#define unknown~-\/111}\hypertarget{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}{}\label{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}
+
+
+\subsection{Function Documentation}
+\index{Layer3.\+h@{Layer3.\+h}!discard\+\_\+packet@{discard\+\_\+packet}}
+\index{discard\+\_\+packet@{discard\+\_\+packet}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{discard\+\_\+packet(struct Packet $\ast$packet)}{discard_packet(struct Packet *packet)}}]{\setlength{\rightskip}{0pt plus 5cm}void discard\+\_\+packet (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Packet} $\ast$}]{packet}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer3_8h_a5cc35a45674625cd8733379d3f0523b8}{}\label{Layer3_8h_a5cc35a45674625cd8733379d3f0523b8}
+
+
+This function is used to delete packet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & structure pointer, it\textquotesingle{}s type is \hyperlink{structPacket}{Packet} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+
+\begin{DoxyCode}
+5                                           \{
+6     packet->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination}=0;
+7     packet->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source}=0b00000000;
+8     packet->\hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble}=0b00000000;
+9     packet->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz}=0b00000000;
+10     packet->\hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc}=0b00000000000000000000000000000000;
+11 \}
+\end{DoxyCode}
+\index{Layer3.\+h@{Layer3.\+h}!type\+\_\+of\+\_\+msg@{type\+\_\+of\+\_\+msg}}
+\index{type\+\_\+of\+\_\+msg@{type\+\_\+of\+\_\+msg}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{type\+\_\+of\+\_\+msg(struct Packet $\ast$packet)}{type_of_msg(struct Packet *packet)}}]{\setlength{\rightskip}{0pt plus 5cm}int type\+\_\+of\+\_\+msg (
+\begin{DoxyParamCaption}
+\item[{struct {\bf Packet} $\ast$}]{packet}
+\end{DoxyParamCaption}
+)}\hypertarget{Layer3_8h_a23b38c7493fb43e33264c3972782f496}{}\label{Layer3_8h_a23b38c7493fb43e33264c3972782f496}
+
+
+This function is used to detect the type of message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & structure pointer, it\textquotesingle{}s type is \hyperlink{structPacket}{Packet} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+integer type data, which is defined in macro 
+\end{DoxyReturn}
+$<$ At first initiaze message type as unknown
+
+$<$ Extract the source address
+
+$<$ Extract destination address
+
+$<$Return my own message to me
+
+$<$Receive my own broadcasting message
+
+$<$ Receive broadcasting message
+
+$<$ Message send to me
+
+$<$Message send to other node\+: relay
+
+$<$Message from unknown source which can not be identified 
+\begin{DoxyCode}
+14                                       \{
+15     \textcolor{keywordtype}{int} message\_type=\hyperlink{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}{unknown}; 
+16     \textcolor{keywordtype}{int} source\_address = packet->\hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source}; 
+17     \textcolor{keywordtype}{int} destination\_address=packet->\hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination}; 
+19     \textcolor{keywordflow}{if}((source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id}) && (destination\_address!=
+      \hyperlink{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{broadcasting\_id}))\{
+20         message\_type=\hyperlink{Layer3_8h_ab7153c7289145c9aab31e838d3f29b0f}{return\_my\_own\_msg}; 
+22     \}
+23     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id}) && (destination\_address==
+      \hyperlink{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{broadcasting\_id}))\{
+24         message\_type=\hyperlink{Layer3_8h_a58352e6aa962709f6a002dbc21406113}{my\_own\_braodcasting\_msg}; 
+25     \}
+26 
+27 
+28     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((!(source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) && (destination\_address==
+      \hyperlink{Layer3_8h_aab720f22f66cc3daa0e843089e24d628}{broadcasting\_id}))\{
+29         message\_type=\hyperlink{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}{broadcasting\_msg}; 
+30     \}
+31 
+32     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((!(source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) && (destination\_address==
+      \hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id}))\{
+33         message\_type=\hyperlink{Layer3_8h_a465792308892364b6fd0d58cf45b6043}{msg\_send\_to\_me}; 
+34     \}
+35     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}((!(source\_address==\hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) && (!(destination\_address==
+      \hyperlink{Layer3_8h_aeb49fa593cb6818cfc97aee412e3eb8d}{my\_own\_id})) &&
+36         (!(destination\_address==\hyperlink{Layer3_8h_a3bd3ae1527491d97c67f22e569f296a4}{broadcasting\_msg})))\{
+37         message\_type=\hyperlink{Layer3_8h_a8aa9037a9afe926a10f769adc957936a}{msg\_send\_to\_other\_node}; 
+38     \}
+39 
+40     \textcolor{keywordflow}{else}\{
+41         message\_type=\hyperlink{Layer3_8h_a09741204cd73a0942c6f97dd0e9d3108}{unknown}; 
+42     \}
+43 
+44     \textcolor{keywordflow}{return} message\_type;
+45 
+46 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{Layer3.\+h@{Layer3.\+h}!priority\+\_\+type@{priority\+\_\+type}}
+\index{priority\+\_\+type@{priority\+\_\+type}!Layer3.\+h@{Layer3.\+h}}
+\subsubsection[{\texorpdfstring{priority\+\_\+type}{priority_type}}]{\setlength{\rightskip}{0pt plus 5cm}int priority\+\_\+type}\hypertarget{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{}\label{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}

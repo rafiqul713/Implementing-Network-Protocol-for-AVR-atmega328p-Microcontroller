@@ -1,0 +1,81 @@
+\hypertarget{UART__Handler_8c}{}\section{Rasp\+Net/\+U\+A\+RT handler/\+U\+A\+R\+T\+\_\+\+Handler.c File Reference}
+\label{UART__Handler_8c}\index{Rasp\+Net/\+U\+A\+R\+T handler/\+U\+A\+R\+T\+\_\+\+Handler.\+c@{Rasp\+Net/\+U\+A\+R\+T handler/\+U\+A\+R\+T\+\_\+\+Handler.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}U\+A\+R\+T\+\_\+\+Handler.\+h\char`\"{}}\\*
+Include dependency graph for U\+A\+R\+T\+\_\+\+Handler.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{UART__Handler_8c__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{UART__Handler_8c__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{UART__Handler_8c_aeef44b01b53c54757fcdd09b859a52a4}{uart\+\_\+transmission} (unsigned char send\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Display a single character in the minicom command line interface. \end{DoxyCompactList}\item 
+unsigned char \hyperlink{UART__Handler_8c_a66dc17a92418b1104efccc95f7e7ec3f}{uart\+\_\+receive} ()
+\begin{DoxyCompactList}\small\item\em U\+A\+RT receive message\+: receive message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{U\+A\+R\+T\+\_\+\+Handler.\+c@{U\+A\+R\+T\+\_\+\+Handler.\+c}!uart\+\_\+receive@{uart\+\_\+receive}}
+\index{uart\+\_\+receive@{uart\+\_\+receive}!U\+A\+R\+T\+\_\+\+Handler.\+c@{U\+A\+R\+T\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{uart\+\_\+receive()}{uart_receive()}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned char uart\+\_\+receive (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{UART__Handler_8c_a66dc17a92418b1104efccc95f7e7ec3f}{}\label{UART__Handler_8c_a66dc17a92418b1104efccc95f7e7ec3f}
+
+
+U\+A\+RT receive message\+: receive message. 
+
+\begin{DoxyReturn}{Returns}
+unsigned character, which is received from U\+A\+RT transmission 
+\end{DoxyReturn}
+$<$ Wait until the data is received 
+\begin{DoxyCode}
+11                             \{
+12     \textcolor{keywordflow}{while}(!(UCSR0A & (1<<RXC0))); 
+13     \textcolor{keywordflow}{return} UDR0; \textcolor{comment}{// UDR return 8 bit}
+14  \}
+\end{DoxyCode}
+\index{U\+A\+R\+T\+\_\+\+Handler.\+c@{U\+A\+R\+T\+\_\+\+Handler.\+c}!uart\+\_\+transmission@{uart\+\_\+transmission}}
+\index{uart\+\_\+transmission@{uart\+\_\+transmission}!U\+A\+R\+T\+\_\+\+Handler.\+c@{U\+A\+R\+T\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{uart\+\_\+transmission(unsigned char send\+\_\+data)}{uart_transmission(unsigned char send_data)}}]{\setlength{\rightskip}{0pt plus 5cm}void uart\+\_\+transmission (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{character}
+\end{DoxyParamCaption}
+)}\hypertarget{UART__Handler_8c_aeef44b01b53c54757fcdd09b859a52a4}{}\label{UART__Handler_8c_aeef44b01b53c54757fcdd09b859a52a4}
+
+
+Display a single character in the minicom command line interface. 
+
+U\+A\+RT transmission message\+: to display message.
+
+$<$ allows to include header file when needed otherwise ignore
+\begin{DoxyParams}{Parameters}
+{\em character} & Character for display in the minicom command line interface \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void nothing has to return from this function 
+\end{DoxyReturn}
+$<$ Wait until the register is free
+
+$<$write the new data in Transmit Buffer (U\+DR) 
+\begin{DoxyCode}
+6                                                \{
+7     \textcolor{keywordflow}{while}(!(UCSR0A & (1<<UDRE0))); 
+8     UDR0= send\_data; 
+9 \}
+\end{DoxyCode}

@@ -1,0 +1,238 @@
+\hypertarget{Timer__Interrupt__Handler_8c}{}\section{Rasp\+Net/\+Interrupt Handler/\+Timer\+\_\+\+Interrupt\+\_\+\+Handler.c File Reference}
+\label{Timer__Interrupt__Handler_8c}\index{Rasp\+Net/\+Interrupt Handler/\+Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Rasp\+Net/\+Interrupt Handler/\+Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+{\ttfamily \#include $<$avr/io.\+h$>$}\\*
+{\ttfamily \#include $<$avr/interrupt.\+h$>$}\\*
+{\ttfamily \#include $<$util/delay.\+h$>$}\\*
+{\ttfamily \#include \char`\"{}Layer1.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Layer2.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Layer3.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Buffer.\+c\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Miscellaneous.\+c\char`\"{}}\\*
+Include dependency graph for Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Timer__Interrupt__Handler_8c__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{Timer__Interrupt__Handler_8c__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Timer__Interrupt__Handler_8c_aec43762dc86e029b395d4e5819192c2d}{I\+SR} (T\+I\+M\+E\+R0\+\_\+\+C\+O\+M\+P\+A\+\_\+vect)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{Transmit\+Index} =0
+\item 
+int \hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\+\_\+flag} =2
+\item 
+int \hyperlink{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}{array\+Index} =0
+\item 
+int \hyperlink{Timer__Interrupt__Handler_8c_a0b38a05fd17813ac9ded6c20924d8a76}{Compare\+\_\+A} =0
+\item 
+int \hyperlink{Timer__Interrupt__Handler_8c_a8b3219b9b8d2e090d4065a74c66635dc}{Compare\+\_\+B} =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\index{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!I\+SR@{I\+SR}}
+\index{I\+SR@{I\+SR}!Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{I\+S\+R(\+T\+I\+M\+E\+R0\+\_\+\+C\+O\+M\+P\+A\+\_\+vect)}{ISR(TIMER0_COMPA_vect)}}]{\setlength{\rightskip}{0pt plus 5cm}I\+SR (
+\begin{DoxyParamCaption}
+\item[{T\+I\+M\+E\+R0\+\_\+\+C\+O\+M\+P\+A\+\_\+vect}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{Timer__Interrupt__Handler_8c_aec43762dc86e029b395d4e5819192c2d}{}\label{Timer__Interrupt__Handler_8c_aec43762dc86e029b395d4e5819192c2d}
+$<$ Check priority type
+
+$<$ 1. Preamble transmit which is 8 bit data
+
+$<$Set sending priority as normal 
+\begin{DoxyCode}
+22                        \{
+23     \hyperlink{Timer__Interrupt__Handler_8c_a0b38a05fd17813ac9ded6c20924d8a76}{Compare\_A}=\hyperlink{Timer__Interrupt__Handler_8c_a0b38a05fd17813ac9ded6c20924d8a76}{Compare\_A}+1;
+24     \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a0b38a05fd17813ac9ded6c20924d8a76}{Compare\_A}>100) \{
+25         \hyperlink{Layer1_8c_a86a83b72f60ece554515ac4a4316dca6}{clock\_signal\_change}();
+26         \_delay\_ms(1000);
+27         \hyperlink{Timer__Interrupt__Handler_8c_a0b38a05fd17813ac9ded6c20924d8a76}{Compare\_A}=0;
+29         \textcolor{keywordflow}{if}((\hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}==\hyperlink{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{priority\_for\_sending\_order}) ||(
+      \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}==\hyperlink{Layer3_8h_aaccf0a951ca84ac3578fa3bcfbac5522}{priority\_for\_relay})) \{
+30             \textcolor{comment}{//\_delay\_ms(1000);}
+32 \textcolor{comment}{}            \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_a5b4f913d88d52723f970056a0ea4dd09}{transmit\_preamble}) \{
+33                 \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+34                     \hyperlink{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{tranmit\_1}();
+35                 \}
+36 
+37                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+38                     \hyperlink{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{tranmit\_0}();
+39                 \}
+40                 \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}++;
+41                 \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}>=8) \{
+42                     \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}=0;
+43                     \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Transmit Preamble: "});
+44                     \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_aa305c88136c91911a5159610863cb41d}{preamble});
+45                     \hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a97826fb6e7415b7cca5b6f704b2c37fc}{transmit\_crc};
+46 
+47                 \}
+48 
+49             \}
+50 
+52             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_a97826fb6e7415b7cca5b6f704b2c37fc}{transmit\_crc}) \{
+53                 \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a027b54125044a7b75a94ebdfef27ab46}{read\_32\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc},31-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+54                     \hyperlink{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{tranmit\_1}();
+55                 \}
+56 
+57                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{Miscellaneous_8c_a027b54125044a7b75a94ebdfef27ab46}{read\_32\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc},31-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+58                     \hyperlink{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{tranmit\_0}();
+59                 \}
+60                 \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}++;
+61                 \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}>=32) \{
+62                     \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Transmit CRC: "});
+63                     \hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a6b4b30550290df6d0f6c7726714672bf}{transmit\_payload\_size};
+64                     \hyperlink{Miscellaneous_8c_a4da719f1865290663e587ffb1b00744d}{show\_32\_bit\_data}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_abad95795e9615463d9d69d298a86b0b8}{crc});
+65                     \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}=0;
+66                 \}
+67 
+68             \}
+69 
+71             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_a6b4b30550290df6d0f6c7726714672bf}{transmit\_payload\_size}) \{
+72                 \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+73                     \hyperlink{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{tranmit\_1}();
+74 
+75                 \}
+76 
+77                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+78                     \hyperlink{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{tranmit\_0}();
+79 
+80                 \}
+81                 \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}++;
+82                 \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}>=8) \{
+83                     \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Payload size send: "});
+84                     \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz});
+85                     \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}=0;
+86                     \hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_a44e78cb310dd2d291b3d3f96c2a4fbf3}{transmit\_destination\_address};
+87                 \}
+88             \}
+89 
+91             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_a44e78cb310dd2d291b3d3f96c2a4fbf3}{transmit\_destination\_address}) \{
+92                 \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+93                     \hyperlink{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{tranmit\_1}();
+94                 \}
+95 
+96                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+97                     \hyperlink{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{tranmit\_0}();
+98                 \}
+99                 \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}++;
+100                 \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}>=8) \{
+101                     \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"\(\backslash\)nDestination address send\(\backslash\)n"});
+102                     \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_af626fe07d93fe4116d613304792df080}{destination});
+103                     \hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_aa4e2ceb5bd48f2fde7e6c7240ca66e44}{transmit\_source\_address};
+104                     \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}=0;
+105                 \}
+106 
+107             \}
+108 
+110             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_aa4e2ceb5bd48f2fde7e6c7240ca66e44}{transmit\_source\_address}) \{
+111                 \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+112                     \hyperlink{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{tranmit\_1}();
+113                 \}
+114                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source},7-\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex})) \{
+115                     \hyperlink{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{tranmit\_0}();
+116                 \}
+117                 \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}++;
+118                 \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}>=8) \{
+119                     \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"\(\backslash\)nSource address send\(\backslash\)n"});
+120                     \hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_afde148ebf464f31e83576556e5bc4102}{transmit\_payload};
+121                     \hyperlink{Miscellaneous_8c_ae61d07597b559d7305b272b31507f138}{show\_8\_bit\_data}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_a01308f5b690e5060fea6037e765058b9}{source});
+122                     \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}=0;
+123                     \hyperlink{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}{arrayIndex}=2;
+124                 \}
+125 
+126             \}
+127 
+129             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}==\hyperlink{Layer3_8h_afde148ebf464f31e83576556e5bc4102}{transmit\_payload}) \{
+130 
+131                 \textcolor{keywordflow}{if}(\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[\hyperlink{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}{arrayIndex}],(7-(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}%8)))) \{
+132                     \hyperlink{Layer2_8c_ae785b505c564edf60c7c6a736235ddec}{tranmit\_1}();
+133                 \}
+134 
+135                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!\hyperlink{Miscellaneous_8c_a3c3d2514913829c2be8324680f0987b9}{read\_8\_bit}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload}[\hyperlink{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}{arrayIndex}],(7-(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}%8)))) \{
+136                     \hyperlink{Layer2_8c_ae79cf97d224edfd2ebfabc1a049360ce}{tranmit\_0}();
+137                 \}
+138                 \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}++;
+139                 \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}%8==0) \{
+140                     \hyperlink{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}{arrayIndex}=\hyperlink{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}{arrayIndex}+1;
+141 
+142                 \}
+143 
+144                 \textcolor{keywordflow}{if}(\hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}>=(((\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz})-2)*8)) \{
+145                     \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Send payload: "});
+146                     \hyperlink{Miscellaneous_8c_a9ea1d4b6a27b5caa55c150b2ba17983a}{show\_payload}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->
+      \hyperlink{structPacket_a58a48ac639979f488f254bbcb98e72b8}{payload},\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer}->\hyperlink{structPacket_ab13014675ea9eda122b1c50842a567fc}{payload\_siz}*8);
+147                     \hyperlink{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{TransmitIndex}=0;
+148                     \textcolor{keywordflow}{if}(\hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}==\hyperlink{Layer3_8h_a3b7ed14628679beda488dc3269b7b6a0}{priority\_for\_sending\_order}) \{
+149                         \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"Transmitted....!"});
+150 
+151                     \}
+152 
+153                     \hyperlink{Layer3_8h_a2a0eb18d69ebbaf44dd4e863fa4f6a59}{priority\_type}=\hyperlink{Layer3_8h_afd5191a3ada0a4968402449c806bd4b3}{priority\_normal}; 
+154                     \hyperlink{Layer3_8c_a5cc35a45674625cd8733379d3f0523b8}{discard\_packet}(\hyperlink{Buffer_8c_ac229f7d7f062771563514df9f3927eb6}{transmit\_packet\_pointer});
+155                     \hyperlink{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{sender\_flag}=\hyperlink{Layer3_8h_af43b7652801ee9e083162514d5372e9f}{transmitted};
+156                     \hyperlink{Miscellaneous_8c_afac087d6e168f5fc2cd8994eb07eadb2}{showLog}(\textcolor{stringliteral}{"----------------transmit cycle finish----------------------"});
+157 
+158                 \}
+159 
+160 
+161             \}
+162 
+163         \}
+164 
+165     \}
+166 
+167 \}
+\end{DoxyCode}
+
+
+\subsection{Variable Documentation}
+\index{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!array\+Index@{array\+Index}}
+\index{array\+Index@{array\+Index}!Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{array\+Index}{arrayIndex}}]{\setlength{\rightskip}{0pt plus 5cm}int array\+Index =0}\hypertarget{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}{}\label{Timer__Interrupt__Handler_8c_ada6d325188acbfd053a663bad47ecda7}
+\index{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!Compare\+\_\+A@{Compare\+\_\+A}}
+\index{Compare\+\_\+A@{Compare\+\_\+A}!Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{Compare\+\_\+A}{Compare_A}}]{\setlength{\rightskip}{0pt plus 5cm}int Compare\+\_\+A =0}\hypertarget{Timer__Interrupt__Handler_8c_a0b38a05fd17813ac9ded6c20924d8a76}{}\label{Timer__Interrupt__Handler_8c_a0b38a05fd17813ac9ded6c20924d8a76}
+\index{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!Compare\+\_\+B@{Compare\+\_\+B}}
+\index{Compare\+\_\+B@{Compare\+\_\+B}!Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{Compare\+\_\+B}{Compare_B}}]{\setlength{\rightskip}{0pt plus 5cm}int Compare\+\_\+B =0}\hypertarget{Timer__Interrupt__Handler_8c_a8b3219b9b8d2e090d4065a74c66635dc}{}\label{Timer__Interrupt__Handler_8c_a8b3219b9b8d2e090d4065a74c66635dc}
+Timer interrupt for transmitting data \index{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!sender\+\_\+flag@{sender\+\_\+flag}}
+\index{sender\+\_\+flag@{sender\+\_\+flag}!Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{sender\+\_\+flag}{sender_flag}}]{\setlength{\rightskip}{0pt plus 5cm}int sender\+\_\+flag =2}\hypertarget{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}{}\label{Timer__Interrupt__Handler_8c_a84100ed1f53f510ef91a3d88f24b4b53}
+\index{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}!Transmit\+Index@{Transmit\+Index}}
+\index{Transmit\+Index@{Transmit\+Index}!Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c@{Timer\+\_\+\+Interrupt\+\_\+\+Handler.\+c}}
+\subsubsection[{\texorpdfstring{Transmit\+Index}{TransmitIndex}}]{\setlength{\rightskip}{0pt plus 5cm}int Transmit\+Index =0}\hypertarget{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}{}\label{Timer__Interrupt__Handler_8c_a00da6a689ea15785d8f930576f3aeecd}
